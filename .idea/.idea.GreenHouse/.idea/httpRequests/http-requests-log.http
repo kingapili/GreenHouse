@@ -1,0 +1,39 @@
+GET http://localhost:91/WeatherForecast
+
+<> 2021-10-24T145237.200.json
+
+###
+
+GET http://localhost:92/WeatherForecast
+
+<> 2021-10-24T145230.200.json
+
+###
+
+GET http://localhost:91/WeatherForecast
+
+<> 2021-10-24T145212.200.json
+
+###
+
+GET http://localhost:92/WeatherForecast
+
+<> 2021-10-24T143745.200.json
+
+###
+
+GET http://localhost:80/WeatherForecast
+Accept: application/json
+
+###
+
+GET http://localhost:5001/WeatherForecast
+Accept: application/json
+
+###
+
+GET http://localhost:91/WeatherForecast
+Accept: application/json
+
+###
+
