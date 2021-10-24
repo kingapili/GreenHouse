@@ -1,3 +1,9 @@
+GET http://localhost:5000/WeatherForecast
+
+<> 2021-10-24T223407.200.json
+
+###
+
 GET http://localhost:91/WeatherForecast
 
 <> 2021-10-24T203905.200.json

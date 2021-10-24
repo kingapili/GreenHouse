@@ -1,16 +1,6 @@
-version: '3.9'
+version: '3.8'
 
 services:
-  mongodb:
-    image: mongo
-    ports:
-      - "27017:27017"
-      - "27018:27018"
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=student
-    container_name: mongodb
-
   rabbitmq_service:
     image: rabbitmq:management
     ports:
@@ -21,7 +11,7 @@ services:
       - backend_network
     container_name: SI_160132_rabbitmq_service
   data_generator:
-    build: ./Sensors
+    image: si_160132_data_generator_img
     ports:
       - "160:80"
     depends_on:
@@ -30,7 +20,7 @@ services:
       - sensors_network
     container_name: SI_160132_data_generator
   api:
-    build: ./API
+    image: si_160132_api_img
     ports:
       - "91:80"
     depends_on:
@@ -40,7 +30,7 @@ services:
       - fronend_network
     container_name: SI_160132_api
   gui:
-    build: ./GUI
+    image: si_160132_gui_img
     ports:
       - "1601:80"
       - "16013:443"
