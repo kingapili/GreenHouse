@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2021-10-25T12:52:11.9219951+00:00",
+    "temperatureC": 16,
+    "temperatureF": 60,
+    "summary": "Freezing"
+  },
+  {
+    "date": "2021-10-26T12:52:11.922744+00:00",
+    "temperatureC": 32,
+    "temperatureF": 89,
+    "summary": "Bracing"
+  },
+  {
+    "date": "2021-10-27T12:52:11.9227528+00:00",
+    "temperatureC": 35,
+    "temperatureF": 94,
+    "summary": "Sweltering"
+  },
+  {
+    "date": "2021-10-28T12:52:11.9227531+00:00",
+    "temperatureC": 26,
+    "temperatureF": 78,
+    "summary": "Bracing"
+  },
+  {
+    "date": "2021-10-29T12:52:11.9227532+00:00",
+    "temperatureC": 7,
+    "temperatureF": 44,
+    "summary": "Freezing"
+  }
+]

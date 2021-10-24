@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+ rabbit_service:
+  image: rabbitmq:management
+  ports:
+  - "5672:5672"
+  - "15672:15672"
+  networks:
+  - greenhouse_network
+ data_generator:
+  build: ./Sensors
+  ports:
+  - "92:80"
+  depends_on:
+  - rabbit_service
+  networks:
+  - greenhouse_network
+ api:
+  build: ./API
+  ports:
+  - "91:80"
+  depends_on:
+  - rabbit_service
+  networks:
+  - greenhouse_network
+ gui:
+  build: ./GUI
+  ports:
+  - "90:80"
+  depends_on:
+  - rabbit_service
+  networks:
+  - greenhouse_network
+  
+networks:
+ greenhouse_network:
+  driver: bridge
