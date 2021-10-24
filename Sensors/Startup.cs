@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Sensors.Configuration;
+using Sensors.Services;
 
 namespace Sensors
 {
@@ -26,6 +28,11 @@ namespace Sensors
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // service with password and username to rabbitMQ
+            services.Configure<RabbitMqOptions>(Configuration.GetSection(RabbitMqOptions.RabbitMq));
+            services.AddSingleton<IRabbitMqService, RabbitMqService>();
+            
+            services.Configure<RabbitMqOptions>(Configuration.GetSection(RabbitMqOptions.RabbitMq));
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Sensors", Version = "v1"}); });
         }

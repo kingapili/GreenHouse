@@ -1,38 +1,62 @@
-version: '3'
+version: '3.9'
 
 services:
- rabbit_service:
-  image: rabbitmq:management
-  ports:
-  - "5672:5672"
-  - "15672:15672"
-  networks:
-  - greenhouse_network
- data_generator:
-  build: ./Sensors
-  ports:
-  - "92:80"
-  depends_on:
-  - rabbit_service
-  networks:
-  - greenhouse_network
- api:
-  build: ./API
-  ports:
-  - "91:80"
-  depends_on:
-  - rabbit_service
-  networks:
-  - greenhouse_network
- gui:
-  build: ./GUI
-  ports:
-  - "90:80"
-  depends_on:
-  - rabbit_service
-  networks:
-  - greenhouse_network
-  
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+      - "27018:27018"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=student
+    container_name: mongodb
+
+  rabbitmq_service:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - sensors_network
+      - backend_network
+    container_name: SI_160132_rabbitmq_service
+  data_generator:
+    build: ./Sensors
+    ports:
+      - "160:80"
+    depends_on:
+      - rabbitmq_service
+    networks:
+      - sensors_network
+    container_name: SI_160132_data_generator
+  api:
+    build: ./API
+    ports:
+      - "91:80"
+    depends_on:
+      - rabbitmq_service
+    networks:
+      - backend_network
+      - fronend_network
+    container_name: SI_160132_api
+  gui:
+    build: ./GUI
+    ports:
+      - "1601:80"
+      - "16013:443"
+    depends_on:
+     - api
+    networks:
+      - fronend_network
+    container_name: SI_160132_gui
+
 networks:
- greenhouse_network:
-  driver: bridge
+  sensors_network:
+    name: SI_160132_sensors
+    driver: bridge
+  backend_network:
+    name: SI_160132_backend
+    driver: bridge
+  fronend_network:
+    name: SI_160132_fronend
+    driver: bridge
