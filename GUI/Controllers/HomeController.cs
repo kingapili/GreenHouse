@@ -20,7 +20,9 @@ namespace GUI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            ViewBag.json_response = await _apiService.GetTest();
+            ViewBag.json_response = await _apiService.GetSensorData(null, null,
+                null, null, 1, 10,
+                null, null);
             return View();
         }
 

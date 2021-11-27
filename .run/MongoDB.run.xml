@@ -32,6 +32,7 @@
             </DockerPortBindingImpl>
           </list>
         </option>
+        <option name="commandLineOptions" value="--network=SI_160132_backend" />
       </settings>
     </deployment>
     <method v="2" />
