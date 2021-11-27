@@ -1,3 +1,19 @@
 GET http://localhost:91/api/Sensors/GetSensorData
 
 ###
+# Exmple requests with all filters, sorting and pageing
+GET http://localhost:91/api/Sensors/GetSensorData?sensorId=1&sensorType=Model.CarbonDioxideSensor&dateTime=2021-11-27T15%3A23%3A47.102Z&value=260&page=1&pageSize=10&sortBy=SensorId&ascending=true
+
+###
+# Exmple requests with all filters
+GET http://localhost:91/api/Sensors/GetSensorData?sensorId=1&sensorType=Model.CarbonDioxideSensor&dateTime=2021-11-27T15%3A23%3A47.102Z&value=260
+
+###
+# Exmple requests with pageing
+GET http://localhost:91/api/Sensors/GetSensorData?page=1&pageSize=10
+
+###
+# Exmple requests with sorting
+GET http://localhost:91/api/Sensors/GetSensorData?sortBy=SensorId&ascending=true
+
+###

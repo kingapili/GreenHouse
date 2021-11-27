@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +19,11 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("GetSensorData")]
-        public ActionResult<List<SensorData>> GetSensorData()
+        public ActionResult<List<SensorData>> GetSensorData([FromQuery]int? sensorId, [FromQuery]string sensorType,
+            [FromQuery]DateTime? dateTime, [FromQuery]double? value, [FromQuery]int? page,[FromQuery] int? pageSize,
+            [FromQuery]string sortBy, [FromQuery]bool? ascending)
         {
-            return _service.Get();
+            return _service.GetAll(sensorId, sensorType, dateTime, value, page, pageSize, sortBy, ascending);
         }
     }
 }
