@@ -11,3 +11,7 @@ GET http://localhost:160/SensorsTest/generate-values/3
 ###
 
 GET http://localhost:160/Sensors/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/Sensors/generate-single

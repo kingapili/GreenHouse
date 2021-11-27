@@ -1,17 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Configuration;
 using API.Services;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace API
@@ -28,16 +23,36 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services with passwords and usernames to mongoDB and rabbitMQ
-            services.Configure<RabbitMqOptions>(Configuration.GetSection(RabbitMqOptions.RabbitMq));
             services.Configure<MongoDbOptions>(Configuration.GetSection(MongoDbOptions.MongoDb));
-            services.AddSingleton<IMongoDbService, MongoDbService>();
-            services.AddSingleton<IRabbitMqService, RabbitMqService>();
-            
-            
+            services.AddSingleton<SensorsService>();
+
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"}); });
 
+            services.AddMassTransit(config =>
+            {
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    config.AddConsumer<RabbitMqConsumer>();
+
+                    var rabbitConfiguration =
+                        Configuration.GetSection(RabbitMqOptions.RabbitMq).Get<RabbitMqOptions>();
+                    /*cfg.Host(rabbitConfiguration.ServerAddress, rabbitConfiguration.Username, h =>
+                    {
+                        h.Username(rabbitConfiguration.Username);
+                        h.Password(rabbitConfiguration.Password);
+                    });*/
+
+                    cfg.Host(new Uri(rabbitConfiguration.ServerAddress), hostConfigurator =>
+                    {
+                        hostConfigurator.Username(rabbitConfiguration.Username);
+                        hostConfigurator.Password(rabbitConfiguration.Password);
+                    });
+                    cfg.ReceiveEndpoint("recvqueue", c => { c.ConfigureConsumer<RabbitMqConsumer>(ctx); });
+                });
+            });
+            services.AddMassTransitHostedService();
+            services.AddScoped<RabbitMqConsumer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

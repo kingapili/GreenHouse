@@ -1,3 +1,4 @@
+using System;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,15 +36,15 @@ namespace Sensors
 
             services.AddMassTransit(config =>
             {
-                config.UsingRabbitMq((ctx, cfg) =>
+                var rabbitConfiguration = Configuration.GetSection(RabbitMqOptions.RabbitMq).Get<RabbitMqOptions>();
+                config.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
-                    var rabbitConfiguration = Configuration.GetSection(RabbitMqOptions.RabbitMq).Get<RabbitMqOptions>();
-                    cfg.Host(rabbitConfiguration.ServerAddress, rabbitConfiguration.Username, h =>
-                    {
-                        h.Username(rabbitConfiguration.Username);
-                        h.Password(rabbitConfiguration.Password);
+                    cfg.Host(new Uri(rabbitConfiguration.ServerAddress), hostConfigurator => 
+                    { 
+                        hostConfigurator.Username(rabbitConfiguration.Username);
+                        hostConfigurator.Password(rabbitConfiguration.Password);
                     });
-                });
+                }));
             });
             services.AddMassTransitHostedService();
         }
