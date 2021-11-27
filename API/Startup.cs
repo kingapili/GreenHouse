@@ -1,5 +1,6 @@
 using System;
 using API.Configuration;
+using API.Formatters;
 using API.Services;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 
 namespace API
@@ -26,7 +28,12 @@ namespace API
             services.Configure<MongoDbOptions>(Configuration.GetSection(MongoDbOptions.MongoDb));
             services.AddSingleton<SensorsService>();
 
-            services.AddControllers();
+            services.AddControllers(options =>
+                {
+                    options.FormatterMappings.SetMediaTypeMappingForFormat("csv", MediaTypeHeaderValue.Parse("text/csv"));
+                    options.OutputFormatters.Add(new CsvOutputFormatter());
+                }
+            ).AddXmlSerializerFormatters();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"}); });
 
             services.AddMassTransit(config =>
@@ -37,12 +44,6 @@ namespace API
 
                     var rabbitConfiguration =
                         Configuration.GetSection(RabbitMqOptions.RabbitMq).Get<RabbitMqOptions>();
-                    /*cfg.Host(rabbitConfiguration.ServerAddress, rabbitConfiguration.Username, h =>
-                    {
-                        h.Username(rabbitConfiguration.Username);
-                        h.Password(rabbitConfiguration.Password);
-                    });*/
-
                     cfg.Host(new Uri(rabbitConfiguration.ServerAddress), hostConfigurator =>
                     {
                         hostConfigurator.Username(rabbitConfiguration.Username);

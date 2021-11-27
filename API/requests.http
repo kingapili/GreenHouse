@@ -17,3 +17,5 @@ GET http://localhost:91/api/Sensors/GetSensorData?page=1&pageSize=10
 GET http://localhost:91/api/Sensors/GetSensorData?sortBy=SensorId&ascending=true
 
 ###
+# Exmple requests in CSV
+GET http://localhost:91/api/Sensors/GetSensorDataInFormat/csv
