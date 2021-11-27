@@ -35,8 +35,6 @@ namespace API.Services
             int? pageSize, string sortBy, bool? ascending)
         {
             // set default values if not provided
-            page ??= 1;
-            pageSize ??= 1000;
             ascending ??= false;
             sortBy ??= "DateTime";
 
@@ -59,14 +57,28 @@ namespace API.Services
                 sort = Builders<Models.SensorData>.Sort.Ascending(sortBy);
             else
                 sort = Builders<Models.SensorData>.Sort.Descending(sortBy);
-
-            var result = _readouts
-                .Aggregate()
-                .Match(filter)
-                .Sort(sort)
-                .Skip((int) ((page - 1) * pageSize))
-                .Limit((int) pageSize)
-                .ToList();
+            
+            List<Models.SensorData> result;
+            
+            // chceck if paging was specified
+            if (!page.HasValue || !pageSize.HasValue)
+            {
+                result = _readouts
+                    .Aggregate()
+                    .Match(filter)
+                    .Sort(sort)
+                    .ToList();
+            }
+            else
+            {
+                result = _readouts
+                    .Aggregate()
+                    .Match(filter)
+                    .Sort(sort)
+                    .Skip((int) ((page - 1) * pageSize))
+                    .Limit((int) pageSize)
+                    .ToList(); 
+            }
 
             return result.Select(data => data.ToDto()).ToList();
         }
