@@ -23,6 +23,7 @@ namespace Model
             return new SensorData()
             {
                 SensorId = Id,
+                SensorType = GetType().ToString(),
                 DateTime = DateTime.Now,
                 Value = Math.Round(rng.NextDouble() * (MaxValue - MinValue) + MinValue, Precision),
                 Unit = DataUnit.WattsPerMeterSquared

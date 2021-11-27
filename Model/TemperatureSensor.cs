@@ -21,6 +21,7 @@ namespace Model
             return new SensorData()
             {
                 SensorId = Id,
+                SensorType = GetType().ToString(),
                 DateTime = DateTime.Now,
                 Value = rng.Next(MinValue, MaxValue),
                 Unit = DataUnit.DegreesCelsius
