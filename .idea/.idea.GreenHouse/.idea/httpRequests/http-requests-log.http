@@ -1,3 +1,221 @@
+GET http://localhost:160/Sensors/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/Sensors/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/Sensors/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/Sensors/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/Sensors/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/Sensors/sensors/0
+
+<> 2021-11-22T222133.200.json
+
+###
+
+GET http://localhost:160/Sensors/sensors/0
+
+<> 2021-11-22T222131.200.json
+
+###
+
+GET http://localhost:160/Sensors/sensors/0
+
+<> 2021-11-22T222126.200.json
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0
+
+<> 2021-11-22T170518.200.json
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0
+
+<> 2021-11-22T170509.200.json
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0
+
+<> 2021-11-22T170506.200.json
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/generate-value
+
+###
+
+GET http://localhost:160/SensorsTest/sensors/0/
+
+###
+
+GET http://localhost:160/SensorsTest/generate-values/3/500
+
+###
+
+GET http://localhost:160/SensorsTest/SensorsTest/generate-values/2/1000
+
+###
+
+GET http://localhost:160/SensorsTest/SensorsTest/generate-values/{{2}}/{{1000}}
+
+###
+
+GET http://localhost:160/Sensors/generate-value/1
+
+###
+
+GET http://localhost:160/Sensors/generate-value/1
+
+###
+
+GET http://localhost:160/Sensors/generate-value/1
+
+###
+
+GET http://localhost:160/Sensors/generate-value/1
+
+###
+
+GET http://localhost:160/Sensors/generate-value/1
+
+<> 2021-11-21T212825.500.txt
+
+###
+
+GET http://localhost:160/Sensors/generate-value/1
+
+###
+
+GET http://localhost:160/SolarRadiation
+
+<> 2021-11-20T162053.200.json
+
+###
+
+GET http://localhost:160/SolarRadiation
+
+<> 2021-11-20T162014.200.json
+
+###
+
+GET http://localhost:160/SolarRadiation
+
+<> 2021-11-20T161343.200.json
+
+###
+
+GET http://localhost:160/WeatherForecast
+
+<> 2021-11-20T161337.200.json
+
+###
+
+GET http://localhost:160/WeatherForecast
+
+###
+
+GET http://localhost:160/WeatherForecast
+
+###
+
+GET http://localhost:160/SolarRadiation
+
+###
+
+GET http://localhost:160/SolarRadiation
+
+###
+
+GET http://localhost:160/WeatherForecast
+
+<> 2021-11-20T151814.200.json
+
+###
+
+GET http://localhost:160/WeatherForecast
+
+<> 2021-11-20T150759.200.json
+
+###
+
+GET http://localhost:160/WeatherForecast
+
+<> 2021-11-20T150722.200.json
+
+###
+
+GET http://localhost:160/WeatherForecast
+
+<> 2021-11-20T135742.200.json
+
+###
+
 GET http://localhost:5000/WeatherForecast
 
 <> 2021-10-24T223407.200.json
@@ -13,95 +231,6 @@ GET http://localhost:91/WeatherForecast
 GET http://localhost:160/WeatherForecast
 
 <> 2021-10-24T203900.200.json
-
-###
-
-GET http://localhost:91/WeatherForecast
-
-<> 2021-10-24T200211.200.json
-
-###
-
-GET http://localhost:90/WeatherForecast
-
-###
-
-GET http://localhost:91/WeatherForecast
-
-<> 2021-10-24T200201.200.json
-
-###
-
-GET http://localhost:5000/WeatherForecast
-
-<> 2021-10-24T194014.200.json
-
-###
-
-GET http://localhost:5000/WeatherForecast
-
-<> 2021-10-24T191605.200.json
-
-###
-
-GET http://localhost:5001/WeatherForecast
-
-###
-
-GET http://localhost:5002/WeatherForecast
-
-###
-
-GET http://localhost:5003/WeatherForecast
-
-###
-
-GET http://localhost:5002/WeatherForecast
-
-###
-
-GET http://localhost:91/WeatherForecast
-
-<> 2021-10-24T182419.200.json
-
-###
-
-GET http://localhost:91/WeatherForecast
-
-<> 2021-10-24T145237.200.json
-
-###
-
-GET http://localhost:92/WeatherForecast
-
-<> 2021-10-24T145230.200.json
-
-###
-
-GET http://localhost:91/WeatherForecast
-
-<> 2021-10-24T145212.200.json
-
-###
-
-GET http://localhost:92/WeatherForecast
-
-<> 2021-10-24T143745.200.json
-
-###
-
-GET http://localhost:80/WeatherForecast
-Accept: application/json
-
-###
-
-GET http://localhost:5001/WeatherForecast
-Accept: application/json
-
-###
-
-GET http://localhost:91/WeatherForecast
-Accept: application/json
 
 ###
 

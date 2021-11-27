@@ -1,0 +1,6 @@
+{
+  "id": 0,
+  "name": "Humidity sensor #0",
+  "interval": 1000,
+  "isSwitchedOn": true
+}

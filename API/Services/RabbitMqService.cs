@@ -1,4 +1,3 @@
-using System.Net.Http;
 using API.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
