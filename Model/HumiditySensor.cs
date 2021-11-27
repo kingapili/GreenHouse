@@ -27,5 +27,17 @@ namespace Model
                 Unit = DataUnit.Percent
             };
         }
+
+        public SensorData GenerateSingleValue(double value)
+        {
+            return new SensorData()
+            {
+                SensorId = Id,
+                SensorType = GetType().ToString(),
+                DateTime = DateTime.Now,
+                Value = value,
+                Unit = DataUnit.Percent
+            };
+        }
     }
 }

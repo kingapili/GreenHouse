@@ -12,5 +12,12 @@ namespace Model
         /// </summary>
         /// <returns>Randomly generated valid SensorData object</returns>
         public SensorData GenerateSingleValue();
+        
+        /// <summary>
+        /// Generates a single random SensorData object valid for given sensor type 
+        /// </summary>
+        /// <param name="value">Value to be generated</param>
+        /// <returns>Randomly generated valid SensorData object</returns>
+        public SensorData GenerateSingleValue(double value);
     }
 }
