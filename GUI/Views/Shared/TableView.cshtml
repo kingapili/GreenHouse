@@ -1,23 +1,24 @@
 <h2>Data</h2>
 <table align="center" border="1">
     <tr>
-        <th>@using (Html.BeginForm(actionName: "GetFiltered",  "Home",new {sort="SensorId"},  FormMethod.Get ))
+        <th>@using (Html.BeginForm(actionName: "GetTablePage",  "Home",new {page = @ViewBag.currentPage, sortBy = "SensorId"},  FormMethod.Get ))
             {
+                <input id="sortBy" value="SensorId" type="hidden" />
                 <input type="submit" value="SensorId"/>
             } </th>
-        <th>@using (Html.BeginForm(actionName: "GetFiltered",  "Home",new {sort="SensorType"},  FormMethod.Get ))
+        <th>@using (Html.BeginForm(actionName: "GetTablePage",  "Home",new {page = @ViewBag.currentPage, sortBy = "SensorType"},  FormMethod.Get ))
             {
                 <input type="submit" value="SensorType"/>
             }</th>
-        <th>@using (Html.BeginForm(actionName: "GetFiltered",  "Home",new {sort="Unit"},  FormMethod.Get ))
+        <th>@using (Html.BeginForm(actionName: "GetTablePage",  "Home",new { page = @ViewBag.currentPage, sortBy = "Unit"},  FormMethod.Get ))
             {
                 <input type="submit" value="Unit"/>
             }</th>
-        <th>@using (Html.BeginForm(actionName: "GetFiltered",  "Home",new {sort="DataTime"},  FormMethod.Get ))
+        <th>@using (Html.BeginForm(actionName: "GetTablePage",  "Home",new {page = @ViewBag.currentPage, sortBy = "DataTime"},  FormMethod.Get ))
             {
                 <input type="submit" value="DataTime"/>
             }</th>
-        <th>@using (Html.BeginForm(actionName: "GetFiltered",  "Home",new {sort="Value"},  FormMethod.Get ))
+        <th>@using (Html.BeginForm(actionName: "GetTablePage",  "Home",new { page = @ViewBag.currentPage, sortBy = "Value"},  FormMethod.Get ))
             {
                 <input type="submit" value="Value"/>
             }</th>
@@ -33,3 +34,16 @@
         </tr>
     }
 </table>
+Page: @ViewBag.currentPage
+@if (@ViewBag.currentPage > 1)
+{
+
+    @using (Html.BeginForm(actionName: "GetTablePage", "Home", new { page = @ViewBag.currentPage - 1, sortBy = @ViewBag.currentsort}, FormMethod.Get))
+    {
+        <input type="submit" value="Previous"/>
+    }
+}
+@using (Html.BeginForm(actionName: "GetTablePage",  "Home",new {page = @ViewBag.currentPage + 1, sortBy = @ViewBag.currentsort},  FormMethod.Get ))
+{
+<input type="submit" value="Next"/>
+}

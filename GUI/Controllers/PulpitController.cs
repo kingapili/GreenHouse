@@ -21,6 +21,7 @@ namespace GUI.Controllers
             _apiService = apiService;
         }
 
+        [Route("/Pulpit")]
         public async Task<IActionResult> Pulpit()
         {
             string jsonResponseSensorData = await _apiService.GetSensorData(null,

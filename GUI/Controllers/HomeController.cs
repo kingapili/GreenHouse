@@ -29,7 +29,7 @@ namespace GUI.Controllers
         public async Task<IActionResult> Index()
         {
             string jsonResponseSensorData = await _apiService.GetSensorData(null, null,
-                null, null, 1, 50,
+                null, null, 1, 20,
                 null, null);
 
             ViewBag.raw_json = jsonResponseSensorData;
@@ -37,47 +37,32 @@ namespace GUI.Controllers
             List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
             
             ViewBag.json_response = sensorData;
+            ViewBag.currentPage = 1;
+            ViewBag.currentsort = "DataTime";
             
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult> Filter(FilterTableForm filterForm)
+
+        
+        [Route("/{sortBy}/{page}")]
+        public async Task<IActionResult> GetTablePage([FromRoute(Name = "page")] int pageNumber,[FromRoute(Name = "sortBy")] string sortBy)
         {
-            string jsonResponseSensorData = await _apiService.GetSensorData(filterForm.sensorId, filterForm.sensorType,
-                null, null, 1, 50,
-                null, null);
+
+            string jsonResponseSensorData = await _apiService.GetSensorData(null, null,
+                null, null, pageNumber, 20,
+                sortBy, null);
+
             ViewBag.raw_json = jsonResponseSensorData;
-            
             List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
-            
             ViewBag.json_response = sensorData;
+            
+            ViewBag.currentPage = pageNumber;
+            ViewBag.currentsort = sortBy;
             
             return View("Index");
-            
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetJson(FilterJsonForm filterForm)
-        {
-            string jsonResponseSensorData = await _apiService.GetSensorData(filterForm.sensorId, filterForm.sensorType,
-                null, null, 1, 50,
-                null, null);
-            return Ok(jsonResponseSensorData);
-        }
         
-        [HttpGet]
-        public async Task<IActionResult> GetCSV(FilterCSVForm filterForm)
-        {
-            String csvResponseSensorData = await _apiService.GetSensorDataInFormat("csv",filterForm.sensorId, filterForm.sensorType,
-                null, null, 1, 50,
-                null, null);
-            return Ok(csvResponseSensorData);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -85,29 +70,7 @@ namespace GUI.Controllers
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
 
-        [HttpGet]
-        [Route("/{sort}")]
-        public async Task<IActionResult> GetFiltered([FromRoute(Name = "sort")] string sortBy = null)
-        {
-            
-            string jsonResponseSensorData = await _apiService.GetSensorData(null, null,
-                null, null, 1, 50,
-                sortBy, null);
-            ViewBag.raw_json = jsonResponseSensorData;
-            List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
-            ViewBag.json_response = sensorData;
-            
-            return View("Index");
-        }
-
-        public IActionResult JsonForm()
-        {
-            return View("FilterJsonForm");
-        }
-        
-        public IActionResult CSVForm()
-        {
-            return View("FilterCSVForm");
-        }
+       
+ 
     }
 }

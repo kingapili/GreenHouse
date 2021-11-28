@@ -20,17 +20,19 @@ namespace GUI.Controllers
             _logger = logger;
             _apiService = apiService;
         }
-
+        
+        [Route("/Series")]
         public async Task<IActionResult> Series()
         {
 
             return View("GraphForm");
         }
 
+        [Route("/Series/Graph")]
         public async Task<IActionResult> Graph(GraphForm graphForm)
         {
             string jsonResponseSensorData = await _apiService.GetSensorData(graphForm.sensorId, graphForm.sensorType,
-                null, null, 1, 50,
+                graphForm.dateTime, null, null, null,
                 null, null);
             
             List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);

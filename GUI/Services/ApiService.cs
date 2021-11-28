@@ -58,7 +58,7 @@ namespace GUI.Services
             if(sensorType != null)
                 requestParams.Add($"sensorType={sensorType}");
             if(dateTime.HasValue)
-                requestParams.Add($"dateTime={dateTime}");
+                requestParams.Add($"dateTime={dateTime.Value.ToString("o")}");
             if(value.HasValue)
                 requestParams.Add($"value={value}");
             if(page.HasValue)

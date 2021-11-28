@@ -21,14 +21,19 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Filter" asp-action="FilterForm">Filter</a>
+                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Series" asp-action="Series">Graph</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="JsonForm">Get JSON</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Filter" asp-action="JsonForm">Get JSON</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CSVForm">Get CSV</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Filter" asp-action="CSVForm">Get CSV</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Pulpit" asp-action="Pulpit">Pulpit</a>
@@ -46,7 +51,7 @@
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2021 - GUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        &copy; 2021 - GUI 
     </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
