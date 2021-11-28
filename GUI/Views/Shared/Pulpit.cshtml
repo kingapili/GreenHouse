@@ -1,0 +1,25 @@
+@model SensorData
+
+    <h2>Data</h2>
+    <table align="center" border="1">
+        <tr>
+            <th>@using (Html.BeginForm(actionName: "GetFiltered", "Home", method: FormMethod.Get, new { target = "_blank" }))
+                {
+                    <input type="submit" value="SensorId"/>
+                } </th>
+            <th>SensorType</th>
+            <th>Unit</th>
+            <th>DateTime</th>
+            <th>Value</th>
+        </tr>
+        @foreach (var s in @ViewBag.json_response)
+        {
+            <tr>
+                <th>@s.sensorId</th>
+                <th>@s.sensorType</th>
+                <th>@s.unit</th>
+                <th>@s.dateTime</th>
+                <th>@s.value</th>
+            </tr>
+        }
+    </table>

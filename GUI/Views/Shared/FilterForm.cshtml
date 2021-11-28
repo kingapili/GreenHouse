@@ -1,0 +1,12 @@
+@model FilterForm
+
+<h2>Filter Settings</h2>
+
+@using (Html.BeginForm(actionName: "Filter", "Home", method: FormMethod.Post))
+{
+    <div>
+        @Html.ValidationSummary()
+    </div>
+    
+    <input type="submit" value="Filter"/>
+}   @* </form> *@
