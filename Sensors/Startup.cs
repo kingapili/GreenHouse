@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,7 +32,7 @@ namespace Sensors
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Sensors", Version = "v1"}); });
 
-            var sensorService = new SensorService(SensorUtils.CreateSensors());
+            var sensorService = new SensorService(SensorUtils.CreateSensors(), new CancellationTokenSource());
             services.AddSingleton<ISensorService>(sensorService);
 
             services.AddMassTransit(config =>

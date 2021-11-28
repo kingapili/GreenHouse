@@ -75,7 +75,7 @@ namespace Sensors.Utils
         }
 
         /// <summary>
-        /// Convert SensorData type to JSON for easier messaging
+        /// Convert SensorData type to JSON for easier logging
         /// </summary>
         /// <param name="data">SensorData object to be converted</param>
         /// <returns>Data from a sensor converted to a serialized JSON string</returns>
