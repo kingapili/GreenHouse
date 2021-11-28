@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using Model;
 
 namespace Sensors.Services
@@ -7,5 +8,9 @@ namespace Sensors.Services
     {
         public List<ISensor> GetSensors();
         public ISensor GetSensor(int id);
+
+        public CancellationTokenSource GetTokenSource();
+
+        public CancellationTokenSource GetNewTokenSource();
     }
 }
