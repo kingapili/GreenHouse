@@ -4,21 +4,25 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
+<h1>Graph:</h1>
+
+
 <figure class="highcharts-figure">
     <div id="container"></div>
     <p class="highcharts-description">
     </p>
 </figure>
 
+
 <script>
 Highcharts.chart('container', {
 
     title: {
-        text: 'Solar Employment Growth by Sector, 2010-2016'
+        text: ''
     },
 
     subtitle: {
-        text: 'Source: thesolarfoundation.com'
+        text: ''
     },
 
     yAxis: {
@@ -29,7 +33,7 @@ Highcharts.chart('container', {
 
     xAxis: {
         title: {
-                    text: 'time'
+                    text: ''
                 }
     },
 
@@ -43,13 +47,12 @@ Highcharts.chart('container', {
         series: {
             label: {
                 connectorAllowed: false
-            },
-            pointStart: 2010
+            }
         }
     },
 
     series: [{
-        name: @ViewBag.name,
+        name: '@ViewBag.name',
         data: @ViewBag.data
         }],
 

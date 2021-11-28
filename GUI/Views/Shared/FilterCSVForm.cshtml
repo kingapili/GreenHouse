@@ -1,2 +1,28 @@
-@model TModel
+@model FilterCSVForm
 
+<h3>Get CSV</h3>
+@using (Html.BeginForm(actionName: "GetCSV", "Home", method: FormMethod.Get, new { target = "_blank" }))
+{
+    <div>
+        @Html.ValidationSummary()
+    </div>
+    
+    <div>
+        <p style="color: red;">@Html.ValidationMessageFor(x => x.sensorId)</p>
+        <p>@Html.LabelFor(x => x.sensorId)
+            @Html.TextBoxFor(x => x.sensorId)</p>
+    </div>
+    
+    <div>
+        <p style="color: red;">@Html.ValidationMessageFor(x => x.sensorType)</p>
+        <p>@Html.LabelFor(x => x.sensorType)
+            @Html.TextBoxFor(x => x.sensorType)</p>
+    </div>
+    
+    <div>
+        <p style="color: red;">@Html.ValidationMessageFor(x => x.dateTime)</p>
+        <p>@Html.LabelFor(x => x.dateTime)
+            @Html.EditorFor(x => x.dateTime)</p>
+    </div>
+    <input type="submit" value="Get"/>
+}   @* </form> *@

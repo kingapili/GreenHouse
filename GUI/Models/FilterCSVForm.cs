@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GUI.Models
 {
-    public class FilterJsonForm
+    public class FilterCSVForm
     {
         public int sensorId { get; set; }
         public string sensorType { get; set; }

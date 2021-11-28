@@ -1,2 +1,32 @@
-@model TModel
+@model GraphForm
 
+<h2>Graph Settings</h2>
+
+@using (Html.BeginForm(actionName: "Graph", "Series", method: FormMethod.Post))
+{
+    <div>
+        @Html.ValidationSummary()
+    </div>
+    
+    <div>
+        <p style="color: red;">@Html.ValidationMessageFor(x => x.sensorId)</p>
+        <p>@Html.LabelFor(x => x.sensorId)
+            @Html.TextBoxFor(x => x.sensorId)</p>
+    </div>
+    
+    <div>
+        <p style="color: red;">@Html.ValidationMessageFor(x => x.sensorType)</p>
+        <p>@Html.LabelFor(x => x.sensorType)
+            @Html.TextBoxFor(x => x.sensorType)</p>
+    </div>
+    
+    <div>
+        <p style="color: red;">@Html.ValidationMessageFor(x => x.dateTime)</p>
+        <p>@Html.LabelFor(x => x.dateTime)
+            @Html.EditorFor(x => x.dateTime)</p>
+    </div>
+        
+
+                                            
+    <input type="submit" value="Render"/>
+} 
