@@ -39,17 +39,27 @@ namespace GUI.Controllers
             ViewBag.json_response = sensorData;
             ViewBag.currentPage = 1;
             ViewBag.currentsort = "DataTime";
+
+            ViewBag.sensorId = null;
+            ViewBag.sensorType = null;
+            ViewBag.dataTime = null;
             
             return View();
         }
 
-        
+        [HttpGet]
         [Route("/{sortBy}/{page}")]
-        public async Task<IActionResult> GetTablePage([FromRoute(Name = "page")] int pageNumber,[FromRoute(Name = "sortBy")] string sortBy)
+        public async Task<IActionResult> GetTablePage(
+            [FromRoute(Name = "page")] int pageNumber,
+            [FromRoute(Name = "sortBy")] string sortBy, 
+            [FromQuery]int? sensorId, 
+            [FromQuery]string sensorType,
+            [FromQuery]DateTime? dateTime)
         {
+            
 
-            string jsonResponseSensorData = await _apiService.GetSensorData(null, null,
-                null, null, pageNumber, 20,
+            string jsonResponseSensorData = await _apiService.GetSensorData(sensorId, sensorType,
+                dateTime, null, pageNumber, 20,
                 sortBy, null);
 
             ViewBag.raw_json = jsonResponseSensorData;
@@ -59,10 +69,41 @@ namespace GUI.Controllers
             ViewBag.currentPage = pageNumber;
             ViewBag.currentsort = sortBy;
             
+            ViewBag.sensorId = sensorId;
+            ViewBag.sensorType = sensorType;
+            ViewBag.dataTime = sensorData;
+            
             return View("Index");
         }
 
-        
+        [HttpPost]
+        [Route("/{sortBy}/{page}")]
+        public async Task<IActionResult> SetTableFilters(
+            [FromRoute(Name = "page")] int pageNumber,
+            [FromRoute(Name = "sortBy")] string sortBy,
+            FilterTableForm filterTableForm)
+        {
+            int? sensorId = filterTableForm.sensorId == 0 ? null : filterTableForm.sensorId;
+            string? sensorType = filterTableForm.sensorType == "" ? null : filterTableForm.sensorType;
+            DateTime? dateTime = filterTableForm.dateTime == DateTime.MinValue ? null : filterTableForm.dateTime;
+
+            string jsonResponseSensorData = await _apiService.GetSensorData(sensorId, sensorType,
+                dateTime, null, pageNumber, 20,
+                sortBy, null);
+
+            ViewBag.raw_json = jsonResponseSensorData;
+            List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
+            ViewBag.json_response = sensorData;
+            
+            ViewBag.currentPage = pageNumber;
+            ViewBag.currentsort = sortBy;
+            
+            ViewBag.sensorId = sensorId;
+            ViewBag.sensorType = sensorType;
+            ViewBag.dataTime = sensorData;
+            
+            return View("Index");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

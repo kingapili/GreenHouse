@@ -31,8 +31,12 @@ namespace GUI.Controllers
         [Route("/Series/Graph")]
         public async Task<IActionResult> Graph(GraphForm graphForm)
         {
-            string jsonResponseSensorData = await _apiService.GetSensorData(graphForm.sensorId, graphForm.sensorType,
-                graphForm.dateTime, null, null, null,
+            int? sensorId = graphForm.sensorId == 0 ? null : graphForm.sensorId;
+            string? sensorType = graphForm.sensorType == "" ? null : graphForm.sensorType;
+            DateTime? dateTime = graphForm.dateTime == DateTime.MinValue ? null : graphForm.dateTime;
+            
+            string jsonResponseSensorData = await _apiService.GetSensorData(sensorId, sensorType,
+                dateTime, null, null, null,
                 null, null);
             
             List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);

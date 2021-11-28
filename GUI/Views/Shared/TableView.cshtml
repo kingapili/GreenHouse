@@ -1,27 +1,74 @@
+@model FilterTableForm
+
 <h2>Data</h2>
+
+<form action="/@ViewBag.currentsort/@ViewBag.currentPage?" method="post">
+
+    
+    <div>
+        <p>@Html.LabelFor(x => x.sensorId)
+        @Html.TextBoxFor(x => x.sensorId)</p>
+    </div>
+    
+    <div>
+
+        <p>@Html.LabelFor(x => x.sensorType)
+        @Html.TextBoxFor(x => x.sensorType)</p>
+    </div>
+    
+    <div>
+
+        <p>@Html.LabelFor(x => x.dateTime)
+        @Html.EditorFor(x => x.dateTime)</p>
+    </div>
+        
+
+                                            
+    <input type="submit" value="Set Filters"/>
+</form> 
+
 <table align="center" border="1">
     <tr>
-        <th>@using (Html.BeginForm(actionName: "GetTablePage",  "Home",new {page = @ViewBag.currentPage, sortBy = "SensorId"},  FormMethod.Get ))
-            {
-                <input id="sortBy" value="SensorId" type="hidden" />
+        <th>
+            <form action="/SensorId/@ViewBag.currentPage?" method="get" data-id="something">
+                <input type="hidden" name="sensorId" value="@ViewBag.sensorId" />
+                <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
+                <input type="hidden" name="dateTime" value="@ViewBag.dateTime" />
                 <input type="submit" value="SensorId"/>
-            } </th>
-        <th>@using (Html.BeginForm(actionName: "GetTablePage",  "Home",new {page = @ViewBag.currentPage, sortBy = "SensorType"},  FormMethod.Get ))
-            {
+            </form>
+        </th>
+        <th>
+            <form action="/SensorType/@ViewBag.currentPage?" method="get" data-id="something">
+                <input type="hidden" name="sensorId" value="@ViewBag.sensorId"/>
+                <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
+                <input type="hidden" name="dateTime" value="@ViewBag.dateTime"/>
                 <input type="submit" value="SensorType"/>
-            }</th>
-        <th>@using (Html.BeginForm(actionName: "GetTablePage",  "Home",new { page = @ViewBag.currentPage, sortBy = "Unit"},  FormMethod.Get ))
-            {
+            </form>
+        </th>
+        <th>
+            <form action="/Unit/@ViewBag.currentPage?" method="get" data-id="something">
+                <input type="hidden" name="sensorId" value="@ViewBag.sensorId"/>
+                <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
+                <input type="hidden" name="dateTime" value="@ViewBag.dateTime"/>
                 <input type="submit" value="Unit"/>
-            }</th>
-        <th>@using (Html.BeginForm(actionName: "GetTablePage",  "Home",new {page = @ViewBag.currentPage, sortBy = "DataTime"},  FormMethod.Get ))
-            {
-                <input type="submit" value="DataTime"/>
-            }</th>
-        <th>@using (Html.BeginForm(actionName: "GetTablePage",  "Home",new { page = @ViewBag.currentPage, sortBy = "Value"},  FormMethod.Get ))
-            {
+            </form>
+        </th>
+        <th>
+            <form action="/DataType/@ViewBag.currentPage?" method="get" data-id="something">
+                <input type="hidden" name="sensorId" value="@ViewBag.sensorId"/>
+                <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
+                <input type="hidden" name="dateTime" value="@ViewBag.dateTime"/>
+                <input type="submit" value="DataType"/>
+            </form>
+        </th>
+        <th>
+            <form action="/Value/@ViewBag.currentPage?" method="get" data-id="something">
+                <input type="hidden" name="sensorId" value="@ViewBag.sensorId"/>
+                <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
+                <input type="hidden" name="dateTime" value="@ViewBag.dateTime"/>
                 <input type="submit" value="Value"/>
-            }</th>
+            </form>
+        </th>
     </tr>
     @foreach (var s in @ViewBag.json_response)
     {
@@ -38,12 +85,16 @@ Page: @ViewBag.currentPage
 @if (@ViewBag.currentPage > 1)
 {
 
-    @using (Html.BeginForm(actionName: "GetTablePage", "Home", new { page = @ViewBag.currentPage - 1, sortBy = @ViewBag.currentsort}, FormMethod.Get))
-    {
+    <form action="/@ViewBag.currentsort/@(@ViewBag.currentPage-1)?" method="get" data-id="something">
+        <input type="hidden" name="sensorId" value="@ViewBag.sensorId"/>
+        <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
+        <input type="hidden" name="dateTime" value="@ViewBag.dateTime"/>
         <input type="submit" value="Previous"/>
-    }
+    </form>
 }
-@using (Html.BeginForm(actionName: "GetTablePage",  "Home",new {page = @ViewBag.currentPage + 1, sortBy = @ViewBag.currentsort},  FormMethod.Get ))
-{
-<input type="submit" value="Next"/>
-}
+<form action="/@ViewBag.currentsort/@(@ViewBag.currentPage+1)?" method="get" data-id="something">
+    <input type="hidden" name="sensorId" value="@ViewBag.sensorId"/>
+    <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
+    <input type="hidden" name="dateTime" value="@ViewBag.dateTime"/>
+    <input type="submit" value="Next"/>
+</form>

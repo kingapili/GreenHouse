@@ -24,8 +24,11 @@ namespace GUI.Controllers
         [Route("/GetJson")]
         public async Task<IActionResult> GetJson(FilterJsonForm filterForm)
         {
-            string jsonResponseSensorData = await _apiService.GetSensorData(filterForm.sensorId, filterForm.sensorType,
-                filterForm.dateTime, null, 1, 50,
+            int? sensorId = filterForm.sensorId == 0 ? null : filterForm.sensorId;
+            string? sensorType = filterForm.sensorType == "" ? null : filterForm.sensorType;
+            DateTime? dateTime = filterForm.dateTime == DateTime.MinValue ? null : filterForm.dateTime;
+            string jsonResponseSensorData = await _apiService.GetSensorData(sensorId, sensorType,
+                dateTime, null, null, null,
                 null, null);
             return Ok(jsonResponseSensorData);
         }
@@ -34,8 +37,11 @@ namespace GUI.Controllers
         [Route("/GetCSV")]
         public async Task<IActionResult> GetCSV(FilterCSVForm filterForm)
         {
-            String csvResponseSensorData = await _apiService.GetSensorDataInFormat("csv",filterForm.sensorId, filterForm.sensorType,
-                filterForm.dateTime, null, 1, 50,
+            int? sensorId = filterForm.sensorId == 0 ? null : filterForm.sensorId;
+            string? sensorType = filterForm.sensorType == "" ? null : filterForm.sensorType;
+            DateTime? dateTime = filterForm.dateTime == DateTime.MinValue ? null : filterForm.dateTime;
+            String csvResponseSensorData = await _apiService.GetSensorDataInFormat("csv",sensorId, sensorType,
+                dateTime, null, null, null,
                 null, null);
             return Ok(csvResponseSensorData);
         }
