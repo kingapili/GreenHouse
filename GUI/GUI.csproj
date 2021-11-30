@@ -6,7 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Model\Model.csproj" />
+        <Reference Include="Model">
+            <HintPath>./Model.dll</HintPath>
+        </Reference>
     </ItemGroup>
 
     <ItemGroup>

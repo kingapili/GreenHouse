@@ -2,7 +2,15 @@
 
 <h2>Data</h2>
 
-<form action="/@ViewBag.currentsort/@ViewBag.currentPage?" method="post">
+<form asp-action="setFilter" method="post"
+      asp-route-sortBy="@Context.Request.Query["sortBy"]"
+      asp-route-page="@Context.Request.Query["page"]"
+                asp-route-value="@Context.Request.Query["value"]"
+                asp-route-pageSize="@Context.Request.Query["pageSize"]"
+                asp-route-sensorType="@Context.Request.Query["sensorType"]"
+                asp-route-sensorId="@Context.Request.Query["sensorId"]"
+                asp-route-datetime="@Context.Request.Query["datetime"]"
+                asp-route-ascending="@Context.Request.Query["ascending"]">
 
     
     <div>
@@ -30,42 +38,54 @@
 <table align="center" border="1">
     <tr>
         <th>
-            <form action="/SensorId/@ViewBag.currentPage?" method="get" data-id="something">
-                <input type="hidden" name="sensorId" value="@ViewBag.sensorId" />
-                <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
-                <input type="hidden" name="dateTime" value="@ViewBag.dateTime" />
+            <form asp-action="setSort" method="post" 
+                  asp-route-page="@Context.Request.Query["page"]"
+                  asp-route-value="@Context.Request.Query["value"]"
+                  asp-route-pageSize="@Context.Request.Query["pageSize"]"
+                  asp-route-sensorType="@Context.Request.Query["sensorType"]"
+                  asp-route-sensorId="@Context.Request.Query["sensorId"]"
+                  asp-route-datetime="@Context.Request.Query["datetime"]"
+                  asp-route-ascending="@Context.Request.Query["ascending"]">
+                <input type="hidden" name="sortBy" value="sensorId" />
                 <input type="submit" value="SensorId"/>
             </form>
         </th>
         <th>
-            <form action="/SensorType/@ViewBag.currentPage?" method="get" data-id="something">
-                <input type="hidden" name="sensorId" value="@ViewBag.sensorId"/>
-                <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
-                <input type="hidden" name="dateTime" value="@ViewBag.dateTime"/>
+            <form asp-action="setSort" method="post"
+                  asp-route-page="@Context.Request.Query["page"]"
+                  asp-route-value="@Context.Request.Query["value"]"
+                  asp-route-pageSize="@Context.Request.Query["pageSize"]"
+                  asp-route-sensorType="@Context.Request.Query["sensorType"]"
+                  asp-route-sensorId="@Context.Request.Query["sensorId"]"
+                  asp-route-datetime="@Context.Request.Query["datetime"]"
+                  asp-route-ascending="@Context.Request.Query["ascending"]">
+                            <input type="hidden" name="sortBy" value="sensorType" />
                 <input type="submit" value="SensorType"/>
             </form>
         </th>
         <th>
-            <form action="/Unit/@ViewBag.currentPage?" method="get" data-id="something">
-                <input type="hidden" name="sensorId" value="@ViewBag.sensorId"/>
-                <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
-                <input type="hidden" name="dateTime" value="@ViewBag.dateTime"/>
-                <input type="submit" value="Unit"/>
-            </form>
-        </th>
-        <th>
-            <form action="/DataType/@ViewBag.currentPage?" method="get" data-id="something">
-                <input type="hidden" name="sensorId" value="@ViewBag.sensorId"/>
-                <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
-                <input type="hidden" name="dateTime" value="@ViewBag.dateTime"/>
+            <form asp-action="setSort" method="post"
+                  asp-route-page="@Context.Request.Query["page"]"
+                  asp-route-value="@Context.Request.Query["value"]"
+                  asp-route-pageSize="@Context.Request.Query["pageSize"]"
+                  asp-route-sensorType="@Context.Request.Query["sensorType"]"
+                  asp-route-sensorId="@Context.Request.Query["sensorId"]"
+                  asp-route-datetime="@Context.Request.Query["datetime"]"
+                  asp-route-ascending="@Context.Request.Query["ascending"]">
+                            <input type="hidden" name="sortBy" value="DataType" />
                 <input type="submit" value="DataType"/>
             </form>
         </th>
         <th>
-            <form action="/Value/@ViewBag.currentPage?" method="get" data-id="something">
-                <input type="hidden" name="sensorId" value="@ViewBag.sensorId"/>
-                <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
-                <input type="hidden" name="dateTime" value="@ViewBag.dateTime"/>
+            <form asp-action="setSort" method="post"
+                  asp-route-page="@Context.Request.Query["page"]"
+                  asp-route-value="@Context.Request.Query["value"]"
+                  asp-route-pageSize="@Context.Request.Query["pageSize"]"
+                  asp-route-sensorType="@Context.Request.Query["sensorType"]"
+                  asp-route-sensorId="@Context.Request.Query["sensorId"]"
+                  asp-route-datetime="@Context.Request.Query["datetime"]"
+                  asp-route-ascending="@Context.Request.Query["ascending"]">
+                <input type="hidden" name="sortBy" value="Value" />
                 <input type="submit" value="Value"/>
             </form>
         </th>
@@ -75,26 +95,55 @@
         <tr>
             <th>@s.sensorId</th>
             <th>@s.sensorType</th>
-            <th>@s.unit</th>
             <th>@s.dateTime</th>
-            <th>@s.value</th>
+            <th>@s.value @s.unit</th>
         </tr>
     }
 </table>
-Page: @ViewBag.currentPage
-@if (@ViewBag.currentPage > 1)
+Page: @Context.Request.Query["page"]
+<form asp-action="setPage" method="post"
+          asp-route-sortBy="@Context.Request.Query["sortBy"]"
+      asp-route-value="@Context.Request.Query["value"]"
+      asp-route-pageSize="@Context.Request.Query["pageSize"]"
+      asp-route-sensorType="@Context.Request.Query["sensorType"]"
+      asp-route-sensorId="@Context.Request.Query["sensorId"]"
+      asp-route-datetime="@Context.Request.Query["datetime"]"
+      asp-route-ascending="@Context.Request.Query["ascending"]">
+    <input type="hidden" name="page" value="1"/>
+    <input type="submit" value="First Page"/>
+</form>
+
+@{
+    int page;
+    bool parse = Int32.TryParse(@Context.Request.Query["page"], out page);
+}
+
+@if(parse)
+{
+@if ( @page > 1)
 {
 
-    <form action="/@ViewBag.currentsort/@(@ViewBag.currentPage-1)?" method="get" data-id="something">
-        <input type="hidden" name="sensorId" value="@ViewBag.sensorId"/>
-        <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
-        <input type="hidden" name="dateTime" value="@ViewBag.dateTime"/>
+    <form asp-action="setPage" method="post"
+          asp-route-sortBy="@Context.Request.Query["sortBy"]"
+                  asp-route-value="@Context.Request.Query["value"]"
+                  asp-route-pageSize="@Context.Request.Query["pageSize"]"
+                  asp-route-sensorType="@Context.Request.Query["sensorType"]"
+                  asp-route-sensorId="@Context.Request.Query["sensorId"]"
+                  asp-route-datetime="@Context.Request.Query["datetime"]"
+                  asp-route-ascending="@Context.Request.Query["ascending"]">
+        <input type="hidden" name="page" value="@( @page- 1)"/>
         <input type="submit" value="Previous"/>
     </form>
 }
-<form action="/@ViewBag.currentsort/@(@ViewBag.currentPage+1)?" method="get" data-id="something">
-    <input type="hidden" name="sensorId" value="@ViewBag.sensorId"/>
-    <input type="hidden" name="sensorType" value="@ViewBag.sensorType"/>
-    <input type="hidden" name="dateTime" value="@ViewBag.dateTime"/>
-    <input type="submit" value="Next"/>
-</form>
+    <form asp-action="setPage" method="post"
+          asp-route-sortBy="@Context.Request.Query["sortBy"]"
+          asp-route-value="@Context.Request.Query["value"]"
+          asp-route-pageSize="@Context.Request.Query["pageSize"]"
+          asp-route-sensorType="@Context.Request.Query["sensorType"]"
+          asp-route-sensorId="@Context.Request.Query["sensorId"]"
+          asp-route-datetime="@Context.Request.Query["datetime"]"
+          asp-route-ascending="@Context.Request.Query["ascending"]">
+        <input type="hidden" name="page" value="@( @page +1)"/>
+        <input type="submit" value="Next"/>
+    </form>
+}

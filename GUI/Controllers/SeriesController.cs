@@ -21,27 +21,23 @@ namespace GUI.Controllers
             _apiService = apiService;
         }
         
-        [Route("/Series")]
-        public async Task<IActionResult> Series()
-        {
-
-            return View("GraphForm");
-        }
 
         [Route("/Series/Graph")]
-        public async Task<IActionResult> Graph(GraphForm graphForm)
+        public async Task<IActionResult> Graph(
+            [FromQuery]int? sensorId, 
+            [FromQuery]string sensorType,
+            [FromQuery]DateTime? dateTime, 
+            [FromQuery]double? value, 
+            [FromQuery]int? page,
+            [FromQuery] int? pageSize)
         {
-            int? sensorId = graphForm.sensorId == 0 ? null : graphForm.sensorId;
-            string? sensorType = graphForm.sensorType == "" ? null : graphForm.sensorType;
-            DateTime? dateTime = graphForm.dateTime == DateTime.MinValue ? null : graphForm.dateTime;
-            
             string jsonResponseSensorData = await _apiService.GetSensorData(sensorId, sensorType,
-                dateTime, null, null, null,
+                dateTime, value, page, pageSize,
                 null, null);
             
             List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
 
-            @ViewBag.name = graphForm.sensorType;
+            @ViewBag.name = "Graf for";
             List<double> values = new List<double>();
 
             for (int i = 0; i < sensorData.Count; i++)
@@ -50,9 +46,7 @@ namespace GUI.Controllers
             }
 
             @ViewBag.data ="[" +  string.Join( ",", values.ToArray() ) + "]";
-            
-            
-            
+
             return View("Series");
         }
     }

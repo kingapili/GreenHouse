@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GUI.Models;
 using GUI.Services;
-using Microsoft.AspNetCore.Routing;
-using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 
@@ -26,83 +23,118 @@ namespace GUI.Controllers
             _apiService = apiService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            [FromQuery]int? sensorId, 
+            [FromQuery]string sensorType,
+            [FromQuery]DateTime? dateTime, 
+            [FromQuery]double? value, 
+            [FromQuery]int? page,
+            [FromQuery] int? pageSize,
+            [FromQuery]string sortBy, 
+            [FromQuery]bool? ascending)
         {
-            string jsonResponseSensorData = await _apiService.GetSensorData(null, null,
-                null, null, 1, 20,
-                null, null);
+            if(!page.HasValue || !pageSize.HasValue)
+                return RedirectToAction("Index", new
+                {
+                    page = 1,
+                    sensorId,
+                    dateTime,
+                    sensorType,
+                    value,
+                    pageSize = 20,
+                    sortBy,
+                    ascending
+                });
+            
+            string jsonResponseSensorData = await _apiService.GetSensorData(sensorId, sensorType,
+                dateTime, value, page, pageSize,
+                sortBy, ascending);
 
             ViewBag.raw_json = jsonResponseSensorData;
 
             List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
             
             ViewBag.json_response = sensorData;
-            ViewBag.currentPage = 1;
-            ViewBag.currentsort = "DataTime";
-
-            ViewBag.sensorId = null;
-            ViewBag.sensorType = null;
-            ViewBag.dataTime = null;
             
             return View();
         }
-
-        [HttpGet]
-        [Route("/{sortBy}/{page}")]
-        public async Task<IActionResult> GetTablePage(
-            [FromRoute(Name = "page")] int pageNumber,
-            [FromRoute(Name = "sortBy")] string sortBy, 
-            [FromQuery]int? sensorId, 
-            [FromQuery]string sensorType,
-            [FromQuery]DateTime? dateTime)
+        
+        [HttpPost]
+        [Route("/setFilter")]
+        public async Task<IActionResult> setFilter(
+            FilterTableForm filterTableForm,
+            [FromQuery]double? value, 
+            [FromQuery]int? page,
+            [FromQuery] int? pageSize,
+            [FromQuery]string sortBy, 
+            [FromQuery]bool? ascending)
         {
-            
+            int? sensorId = filterTableForm.sensorId == 0 ? null : filterTableForm.sensorId;
+            string sensorType = filterTableForm.sensorType == "" ? null : filterTableForm.sensorType;
+            DateTime? dateTime = filterTableForm.dateTime == DateTime.MinValue ? null : filterTableForm.dateTime;
 
-            string jsonResponseSensorData = await _apiService.GetSensorData(sensorId, sensorType,
-                dateTime, null, pageNumber, 20,
-                sortBy, null);
-
-            ViewBag.raw_json = jsonResponseSensorData;
-            List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
-            ViewBag.json_response = sensorData;
-            
-            ViewBag.currentPage = pageNumber;
-            ViewBag.currentsort = sortBy;
-            
-            ViewBag.sensorId = sensorId;
-            ViewBag.sensorType = sensorType;
-            ViewBag.dataTime = sensorData;
-            
-            return View("Index");
+            return RedirectToAction("Index", new
+            {
+                page,
+                sensorId,
+                dateTime,
+                sensorType,
+                value,
+                pageSize,
+                sortBy,
+                ascending
+            });
         }
 
         [HttpPost]
-        [Route("/{sortBy}/{page}")]
-        public async Task<IActionResult> SetTableFilters(
-            [FromRoute(Name = "page")] int pageNumber,
-            [FromRoute(Name = "sortBy")] string sortBy,
-            FilterTableForm filterTableForm)
+        [Route("/setPage")]
+        public async Task<IActionResult> SetPage(
+            [FromForm(Name = "page")] int pageNumber,
+            [FromQuery]int? sensorId, 
+            [FromQuery]string sensorType,
+            [FromQuery]DateTime? dateTime, 
+            [FromQuery]double? value,
+            [FromQuery]int? pageSize,
+            [FromQuery]string sortBy, 
+            [FromQuery]bool? ascending)
         {
-            int? sensorId = filterTableForm.sensorId == 0 ? null : filterTableForm.sensorId;
-            string? sensorType = filterTableForm.sensorType == "" ? null : filterTableForm.sensorType;
-            DateTime? dateTime = filterTableForm.dateTime == DateTime.MinValue ? null : filterTableForm.dateTime;
-
-            string jsonResponseSensorData = await _apiService.GetSensorData(sensorId, sensorType,
-                dateTime, null, pageNumber, 20,
-                sortBy, null);
-
-            ViewBag.raw_json = jsonResponseSensorData;
-            List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
-            ViewBag.json_response = sensorData;
-            
-            ViewBag.currentPage = pageNumber;
-            ViewBag.currentsort = sortBy;
-            
-            ViewBag.sensorId = sensorId;
-            ViewBag.sensorType = sensorType;
-            ViewBag.dataTime = sensorData;
-            
-            return View("Index");
+            return RedirectToAction("Index", new
+            {
+                page = pageNumber,
+                sensorId,
+                dateTime,
+                sensorType,
+                value,
+                pageSize,
+                sortBy,
+                ascending
+            });
+        }
+        
+        [HttpPost]
+        [Route("/setSort")]
+        public async Task<IActionResult> setSort(
+            [FromForm(Name = "sortBy")] string sortBy,
+            [FromQuery]int? sensorId, 
+            [FromQuery]string sensorType,
+            [FromQuery]DateTime? dateTime, 
+            [FromQuery]double? value,
+            [FromQuery] int? page,
+            [FromQuery]int? pageSize,
+            [FromQuery]bool? ascending)
+        {
+            bool newAscending = ascending.HasValue? !ascending.Value: true;
+            return RedirectToAction("Index", new
+            {
+                page = page,
+                sensorId = sensorId,
+                dateTime = dateTime,
+                sensorType = sensorType,
+                value = value,
+                pageSize = pageSize,
+                sortBy = sortBy,
+                ascending = newAscending
+            });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

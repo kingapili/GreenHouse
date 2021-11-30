@@ -54,19 +54,19 @@ namespace GUI.Services
         {
             List<string> requestParams = new List<string>();
             if(sensorId.HasValue)
-                requestParams.Add($"sensorId={sensorId}");
+                requestParams.Add($"sensorId={sensorId.Value}");
             if(sensorType != null)
                 requestParams.Add($"sensorType={sensorType}");
             if(dateTime.HasValue)
                 requestParams.Add($"dateTime={dateTime.Value.ToString("o")}");
             if(value.HasValue)
-                requestParams.Add($"value={value}");
+                requestParams.Add($"value={value.Value}");
             if(page.HasValue)
-                requestParams.Add($"page={page}");
+                requestParams.Add($"page={page.Value}");
             if(pageSize.HasValue)
-                requestParams.Add($"pageSize={pageSize}");
+                requestParams.Add($"pageSize={pageSize.Value}");
             if(ascending.HasValue)
-                requestParams.Add($"sensorId={ascending}");
+                requestParams.Add($"ascending={ascending.Value}");
             if(sortBy != null)
                 requestParams.Add($"sortBy={sortBy}");
 

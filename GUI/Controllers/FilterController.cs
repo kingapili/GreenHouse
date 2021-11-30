@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using GUI.Models;
 using GUI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 
 namespace GUI.Controllers
 {
@@ -22,19 +25,25 @@ namespace GUI.Controllers
         }
         [HttpGet]
         [Route("/GetJson")]
+        [Produces("application/json")]
         public async Task<IActionResult> GetJson(FilterJsonForm filterForm)
         {
             int? sensorId = filterForm.sensorId == 0 ? null : filterForm.sensorId;
             string? sensorType = filterForm.sensorType == "" ? null : filterForm.sensorType;
             DateTime? dateTime = filterForm.dateTime == DateTime.MinValue ? null : filterForm.dateTime;
-            string jsonResponseSensorData = await _apiService.GetSensorData(sensorId, sensorType,
+            string jsonResponseSensorData = await _apiService.GetSensorDataInFormat("json", sensorId, sensorType,
                 dateTime, null, null, null,
                 null, null);
-            return Ok(jsonResponseSensorData);
+            var stream = new MemoryStream(Encoding.ASCII.GetBytes(jsonResponseSensorData));  
+            return new FileStreamResult(stream, new MediaTypeHeaderValue("application/json"))  
+            {  
+                FileDownloadName = "data.json"  
+            }; 
         }
         
         [HttpGet]
         [Route("/GetCSV")]
+        [Produces("text/csv")]
         public async Task<IActionResult> GetCSV(FilterCSVForm filterForm)
         {
             int? sensorId = filterForm.sensorId == 0 ? null : filterForm.sensorId;
@@ -43,7 +52,11 @@ namespace GUI.Controllers
             String csvResponseSensorData = await _apiService.GetSensorDataInFormat("csv",sensorId, sensorType,
                 dateTime, null, null, null,
                 null, null);
-            return Ok(csvResponseSensorData);
+            var stream = new MemoryStream(Encoding.ASCII.GetBytes(csvResponseSensorData));  
+            return new FileStreamResult(stream, new MediaTypeHeaderValue("text/csv"))  
+            {  
+                FileDownloadName = "data.csv"  
+            };  
         }
         
         [Route("/JsonForm")]
