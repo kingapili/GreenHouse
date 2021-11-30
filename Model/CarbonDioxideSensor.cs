@@ -22,7 +22,7 @@ namespace Model
             return new SensorData()
             {
                 SensorId = Id,
-                SensorType = GetType().ToString(),
+                SensorType = GetType().ToString().Replace("Model.", ""),
                 DateTime = DateTime.Now,
                 Value = rng.Next(MinValue, MaxValue),
                 Unit = DataUnit.Ppm
@@ -34,7 +34,7 @@ namespace Model
             return new SensorData()
             {
                 SensorId = Id,
-                SensorType = GetType().ToString(),
+                SensorType = GetType().ToString().Replace("Model.", ""),
                 DateTime = DateTime.Now,
                 Value = value,
                 Unit = DataUnit.Ppm
