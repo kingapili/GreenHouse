@@ -1,7 +1,7 @@
 @model FilterJsonForm
 
 <h3>Get JSON</h3>
-@using (Html.BeginForm(actionName: "GetJson", "Filter", method: FormMethod.Get, new { target = "_blank" }))
+@using (Html.BeginForm(actionName: "GetJson", "Files", method: FormMethod.Get, new { target = "_blank" }))
 {
     <div>
         @Html.ValidationSummary()

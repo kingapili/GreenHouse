@@ -8,7 +8,7 @@ namespace GUI.Models
 {
     public class FilterTableForm
     {
-        public int sensorId { get; set; }
+        public int? sensorId { get; set; }
         public string sensorType { get; set; }
         [DisplayName("Start date")]
         [DataType(DataType.DateTime)]

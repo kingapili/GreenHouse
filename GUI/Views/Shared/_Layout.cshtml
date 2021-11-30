@@ -35,7 +35,7 @@
                   asp-route-ascending="@Context.Request.Query["ascending"]">Graph</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Filter" asp-action="GetJson"
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Files" asp-action="GetJson"
       asp-route-sortBy="@Context.Request.Query["sortBy"]"
       asp-route-page="@Context.Request.Query["page"]"
                 asp-route-value="@Context.Request.Query["value"]"
@@ -47,7 +47,7 @@
                 asp-route-ascending="@Context.Request.Query["ascending"]">Get JSON</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Filter" asp-action="GetCSV"
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Files" asp-action="GetCSV"
       asp-route-sortBy="@Context.Request.Query["sortBy"]"
       asp-route-page="@Context.Request.Query["page"]"
                 asp-route-value="@Context.Request.Query["value"]"

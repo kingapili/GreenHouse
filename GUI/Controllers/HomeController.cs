@@ -34,20 +34,31 @@ namespace GUI.Controllers
             [FromQuery]string sortBy, 
             [FromQuery]bool? ascending)
         {
-            if(!page.HasValue || !pageSize.HasValue)
-                return RedirectToAction("Index", new
-                {
-                    page = 1,
-                    sensorId,
-                    startDatetime = startDatetime,
-                    endDatetime = endDatetime,
-                    sensorType,
-                    value,
-                    pageSize = 20,
-                    sortBy,
-                    ascending
-                });
-
+            return RedirectToAction("Data", new
+            {
+                page = 1,
+                sensorId,
+                startDatetime = startDatetime,
+                endDatetime = endDatetime,
+                sensorType,
+                value,
+                pageSize = 20,
+                sortBy,
+                ascending
+            });
+        }
+        
+        public async Task<IActionResult> Data(
+            [FromQuery]int? sensorId, 
+            [FromQuery]string sensorType,
+            [FromQuery]DateTime? startDatetime, 
+            [FromQuery]DateTime? endDatetime, 
+            [FromQuery]double? value, 
+            [FromQuery]int? page,
+            [FromQuery] int? pageSize,
+            [FromQuery]string sortBy, 
+            [FromQuery]bool? ascending)
+        {
             string jsonResponseSensorData = await _apiService.GetSensorData(sensorId, sensorType,
                 startDatetime, endDatetime, value, page, pageSize,
                 sortBy, ascending);
@@ -58,7 +69,7 @@ namespace GUI.Controllers
             
             ViewBag.json_response = sensorData;
             
-            return View();
+            return View("Index");
         }
         
         [HttpPost]
@@ -71,11 +82,10 @@ namespace GUI.Controllers
             [FromQuery]string sortBy, 
             [FromQuery]bool? ascending)
         {
-            int? sensorId = filterTableForm.sensorId == 0 ? null : filterTableForm.sensorId;
+            int? sensorId = filterTableForm.sensorId;
             string sensorType = filterTableForm.sensorType == "" ? null : filterTableForm.sensorType;
             DateTime? startDatetime = filterTableForm.startDatetime == DateTime.MinValue ? null : filterTableForm.startDatetime;
             DateTime? endDatetime = filterTableForm.endDatetime == DateTime.MinValue ? null : filterTableForm.endDatetime;
-            
 
             return RedirectToAction("Index", new
             {
@@ -104,7 +114,7 @@ namespace GUI.Controllers
             [FromQuery]string sortBy, 
             [FromQuery]bool? ascending)
         {
-            return RedirectToAction("Index", new
+            return RedirectToAction("Data", new
             {
                 page = pageNumber,
                 sensorId,
@@ -132,7 +142,7 @@ namespace GUI.Controllers
             [FromQuery]bool? ascending)
         {
             bool newAscending = ascending.HasValue? !ascending.Value: true;
-            return RedirectToAction("Index", new
+            return RedirectToAction("Data", new
             {
                 page = page,
                 sensorId = sensorId,

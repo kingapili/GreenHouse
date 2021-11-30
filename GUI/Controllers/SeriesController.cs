@@ -30,15 +30,27 @@ namespace GUI.Controllers
             [FromQuery]DateTime? endDateTime,
             [FromQuery]double? value, 
             [FromQuery]int? page,
-            [FromQuery] int? pageSize)
+            [FromQuery] int? pageSize,
+            [FromQuery] string sortBy,
+            [FromQuery] bool? ascending
+            )
         {
             string jsonResponseSensorData = await _apiService.GetSensorData(sensorId, sensorType,
                 startDateTime, endDateTime,  value, page, pageSize,
-                null, null);
+                sortBy, ascending);
             
             List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
 
-            @ViewBag.name = "Graf for " + sensorType;
+            @ViewBag.name = "Graf for ";
+            if(sensorType!= null)
+                @ViewBag.name += sensorType + " type ";
+            if(sensorId.HasValue)
+                @ViewBag.name += "sensorId: " + sensorId.Value ;
+            if(startDateTime.HasValue)
+                @ViewBag.name += "from date: " + startDateTime.Value + " ";
+            if(endDateTime.HasValue)
+                @ViewBag.name += "to date: " + endDateTime.Value + " ";
+                
             List<double> values = new List<double>();
 
             for (int i = 0; i < sensorData.Count; i++)

@@ -1,7 +1,7 @@
 @model FilterCSVForm
 
 <h3>Get CSV</h3>
-@using (Html.BeginForm(actionName: "GetCSV", "Filter", method: FormMethod.Get, new { target = "_blank" }))
+@using (Html.BeginForm(actionName: "GetCSV", "Files", method: FormMethod.Get, new { target = "_blank" }))
 {
     <div>
         @Html.ValidationSummary()
