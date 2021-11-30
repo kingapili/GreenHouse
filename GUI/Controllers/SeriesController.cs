@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
+using GUI.Model;
 using GUI.Models;
 using GUI.Services;
 using Microsoft.AspNetCore.Mvc;

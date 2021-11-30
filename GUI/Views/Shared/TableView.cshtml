@@ -1,3 +1,4 @@
+@using GUI.Model
 @model FilterTableForm
 
 <h2>Data</h2>
@@ -101,13 +102,14 @@
             </form>
         </th>
     </tr>
-    @foreach (var s in @ViewBag.json_response)
+    @foreach (SensorData s in @ViewBag.json_response)
     {
         <tr>
             <th>@s.sensorId</th>
             <th>@s.sensorType</th>
             <th>@s.dateTime</th>
-            <th>@s.value @s.unit</th>
+            <th>@s.value @s.unit
+            </th>
         </tr>
     }
 </table>

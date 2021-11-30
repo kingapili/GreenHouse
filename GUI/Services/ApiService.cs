@@ -60,9 +60,9 @@ namespace GUI.Services
             if(sensorType != null)
                 requestParams.Add($"sensorType={sensorType}");
             if(startDateTime.HasValue)
-                requestParams.Add($"startDateTime={startDateTime.Value.ToString("o")}");
+                requestParams.Add($"startDateTime={startDateTime.Value:o}");
             if(endDateTime.HasValue)
-                requestParams.Add($"endDateTime={endDateTime.Value.ToString("o")}");
+                requestParams.Add($"endDateTime={endDateTime.Value:o}");
             if(value.HasValue)
                 requestParams.Add($"value={value.Value}");
             if(page.HasValue)

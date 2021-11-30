@@ -11,7 +11,7 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GUI</a>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Greenhouse</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,7 +31,7 @@
                     asp-route-sensorType="@Context.Request.Query["sensorType"]"
                     asp-route-sensorId="@Context.Request.Query["sensorId"]"
                     asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
-                  asp-route-endDatetime="@Context.Request.Query["endDatetime"]"\
+                  asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
                   asp-route-ascending="@Context.Request.Query["ascending"]">Graph</a>
                     </li>
                     <li class="nav-item">

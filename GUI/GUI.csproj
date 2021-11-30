@@ -6,12 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Reference Include="Model">
-            <HintPath>./Model.dll</HintPath>
-        </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="Views\Validation" />
     </ItemGroup>
 

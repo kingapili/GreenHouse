@@ -6,12 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Reference Include="Model">
-            <HintPath>./Model.dll</HintPath>
-        </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="MassTransit" Version="7.3.0-develop.308" />
         <PackageReference Include="MassTransit.AspNetCore" Version="7.2.4" />
         <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.0-develop.304" />

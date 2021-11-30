@@ -27,7 +27,6 @@ namespace Sensors
         {
             // service with password and username to rabbitMQ
             services.Configure<RabbitMqOptions>(Configuration.GetSection(RabbitMqOptions.RabbitMq));
-            services.AddSingleton<IRabbitMqService, RabbitMqService>();
             
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Sensors", Version = "v1"}); });

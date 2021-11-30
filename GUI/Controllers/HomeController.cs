@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using GUI.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GUI.Models;
@@ -66,7 +67,7 @@ namespace GUI.Controllers
             ViewBag.raw_json = jsonResponseSensorData;
 
             List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
-            
+
             ViewBag.json_response = sensorData;
             
             return View("Index");
