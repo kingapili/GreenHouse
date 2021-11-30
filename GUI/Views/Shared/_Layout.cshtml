@@ -11,7 +11,7 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GUI</a>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Greenhouse</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,8 +21,45 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Series" asp-action="Graph"
+                  asp-route-sortBy="@Context.Request.Query["sortBy"]"
+                  asp-route-page="@Context.Request.Query["page"]"
+                    asp-route-value="@Context.Request.Query["value"]"
+                    asp-route-pageSize="@Context.Request.Query["pageSize"]"
+                    asp-route-sensorType="@Context.Request.Query["sensorType"]"
+                    asp-route-sensorId="@Context.Request.Query["sensorId"]"
+                    asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+                  asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
+                  asp-route-ascending="@Context.Request.Query["ascending"]">Graph</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Files" asp-action="GetJson"
+      asp-route-sortBy="@Context.Request.Query["sortBy"]"
+      asp-route-page="@Context.Request.Query["page"]"
+                asp-route-value="@Context.Request.Query["value"]"
+                asp-route-pageSize="@Context.Request.Query["pageSize"]"
+                asp-route-sensorType="@Context.Request.Query["sensorType"]"
+                asp-route-sensorId="@Context.Request.Query["sensorId"]"
+                asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+                                asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
+                asp-route-ascending="@Context.Request.Query["ascending"]">Get JSON</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Files" asp-action="GetCSV"
+      asp-route-sortBy="@Context.Request.Query["sortBy"]"
+      asp-route-page="@Context.Request.Query["page"]"
+                asp-route-value="@Context.Request.Query["value"]"
+                asp-route-pageSize="@Context.Request.Query["pageSize"]"
+                asp-route-sensorType="@Context.Request.Query["sensorType"]"
+                asp-route-sensorId="@Context.Request.Query["sensorId"]"
+                asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+                                asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
+                asp-route-ascending="@Context.Request.Query["ascending"]">Get CSV</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Pulpit" asp-action="Pulpit">Pulpit</a>
                     </li>
                 </ul>
             </div>
@@ -37,7 +74,7 @@
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2021 - GUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        &copy; 2021 - GUI 
     </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

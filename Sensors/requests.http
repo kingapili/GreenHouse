@@ -1,3 +1,32 @@
-GET http://localhost:160/WeatherForecast
+# Get list of all existing sensors
+GET http://localhost:160/Sensors
 
 ###
+
+# Get info about sensor with id = {id}
+GET http://localhost:160/Sensors/{id}
+
+###
+
+# Generate single random data from sensor with id = {id}
+GET http://localhost:160/Sensors/{id}/generate-single
+
+###
+
+# Generate single data with value = {value} from sensor with id = {id}
+GET http://localhost:160/Sensors/{id}/generate-single/{value}
+
+###
+
+# Generate single random data from all sensors (30 data in total)
+GET http://localhost:160/Sensors/generate-single
+
+###
+
+# Start generating data from all sensors
+GET http://localhost:160/Sensors/runall
+
+###
+
+# Stop generating data from all sensors
+GET http://localhost:160/Sensors/stopall

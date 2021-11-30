@@ -3,7 +3,7 @@
     <deployment type="docker-image">
       <settings>
         <option name="imageTag" value="mongo" />
-        <option name="containerName" value="mongodb" />
+        <option name="containerName" value="admin-mongodb_mongo" />
         <option name="envVars">
           <list>
             <DockerEnvVarImpl>
@@ -13,6 +13,10 @@
             <DockerEnvVarImpl>
               <option name="name" value="MONGO_INITDB_ROOT_PASSWORD" />
               <option name="value" value="student" />
+            </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="MONGO_INITDB_DATABASE" />
+              <option name="value" value="SI_160132_greenhouse_db" />
             </DockerEnvVarImpl>
           </list>
         </option>
@@ -28,6 +32,7 @@
             </DockerPortBindingImpl>
           </list>
         </option>
+        <option name="commandLineOptions" value="--network=SI_160132_backend" />
       </settings>
     </deployment>
     <method v="2" />

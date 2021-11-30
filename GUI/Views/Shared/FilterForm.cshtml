@@ -1,0 +1,37 @@
+@model FilterTableForm
+
+<h2>Filter Settings</h2>
+
+@using (Html.BeginForm(actionName: "setFilter", "Home", method: FormMethod.Post))
+{
+    <div>
+        @Html.ValidationSummary()
+    </div>
+    
+    <div>
+        <p style="color: red;">@Html.ValidationMessageFor(x => x.sensorId)</p>
+        <p>@Html.LabelFor(x => x.sensorId)
+        @Html.TextBoxFor(x => x.sensorId)</p>
+    </div>
+    
+    <div>
+        <p style="color: red;">@Html.ValidationMessageFor(x => x.sensorType)</p>
+        <p>@Html.LabelFor(x => x.sensorType)
+        @Html.TextBoxFor(x => x.sensorType)</p>
+    </div>
+    
+    <div>
+        <p style="color: red;">@Html.ValidationMessageFor(x => x.startDatetime)</p>
+        <p>@Html.LabelFor(x => x.startDatetime)
+        @Html.EditorFor(x => x.startDatetime)</p>
+    </div>
+        
+
+                                            
+    <input type="submit" value="Filter"/>
+}   @* </form> *@
+
+
+
+
+

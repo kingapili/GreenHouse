@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2021-11-21T15:13:37.4417197+00:00",
+    "temperatureC": 52,
+    "temperatureF": 125,
+    "summary": "Sweltering"
+  },
+  {
+    "date": "2021-11-22T15:13:37.4435461+00:00",
+    "temperatureC": 0,
+    "temperatureF": 32,
+    "summary": "Warm"
+  },
+  {
+    "date": "2021-11-23T15:13:37.4435488+00:00",
+    "temperatureC": -12,
+    "temperatureF": 11,
+    "summary": "Scorching"
+  },
+  {
+    "date": "2021-11-24T15:13:37.4435491+00:00",
+    "temperatureC": 17,
+    "temperatureF": 62,
+    "summary": "Hot"
+  },
+  {
+    "date": "2021-11-25T15:13:37.4435493+00:00",
+    "temperatureC": 5,
+    "temperatureF": 40,
+    "summary": "Scorching"
+  }
+]

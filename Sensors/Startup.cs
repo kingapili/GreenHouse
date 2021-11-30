@@ -1,18 +1,15 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Sensors.Configuration;
 using Sensors.Services;
+using Sensors.Utils;
+using RabbitMqOptions = Sensors.Configuration.RabbitMqOptions;
 
 namespace Sensors
 {
@@ -30,11 +27,26 @@ namespace Sensors
         {
             // service with password and username to rabbitMQ
             services.Configure<RabbitMqOptions>(Configuration.GetSection(RabbitMqOptions.RabbitMq));
-            services.AddSingleton<IRabbitMqService, RabbitMqService>();
             
-            services.Configure<RabbitMqOptions>(Configuration.GetSection(RabbitMqOptions.RabbitMq));
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Sensors", Version = "v1"}); });
+
+            var sensorService = new SensorService(SensorUtils.CreateSensors(), new CancellationTokenSource());
+            services.AddSingleton<ISensorService>(sensorService);
+
+            services.AddMassTransit(config =>
+            {
+                var rabbitConfiguration = Configuration.GetSection(RabbitMqOptions.RabbitMq).Get<RabbitMqOptions>();
+                config.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+                {
+                    cfg.Host(new Uri(rabbitConfiguration.ServerAddress), hostConfigurator => 
+                    { 
+                        hostConfigurator.Username(rabbitConfiguration.Username);
+                        hostConfigurator.Password(rabbitConfiguration.Password);
+                    });
+                }));
+            });
+            services.AddMassTransitHostedService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,11 +60,8 @@ namespace Sensors
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
