@@ -30,9 +30,10 @@ namespace GUI.Controllers
         {
             int? sensorId = filterForm.sensorId == 0 ? null : filterForm.sensorId;
             string? sensorType = filterForm.sensorType == "" ? null : filterForm.sensorType;
-            DateTime? dateTime = filterForm.dateTime == DateTime.MinValue ? null : filterForm.dateTime;
+            DateTime? startDateTime = filterForm.startDatetime == DateTime.MinValue ? null : filterForm.startDatetime;
+            DateTime? endDateTime = filterForm.endDatetime == DateTime.MinValue ? null : filterForm.endDatetime;
             string jsonResponseSensorData = await _apiService.GetSensorDataInFormat("json", sensorId, sensorType,
-                dateTime, null, null, null,
+                startDateTime, endDateTime, null, null, null,
                 null, null);
             var stream = new MemoryStream(Encoding.ASCII.GetBytes(jsonResponseSensorData));  
             return new FileStreamResult(stream, new MediaTypeHeaderValue("application/json"))  
@@ -48,9 +49,10 @@ namespace GUI.Controllers
         {
             int? sensorId = filterForm.sensorId == 0 ? null : filterForm.sensorId;
             string? sensorType = filterForm.sensorType == "" ? null : filterForm.sensorType;
-            DateTime? dateTime = filterForm.dateTime == DateTime.MinValue ? null : filterForm.dateTime;
+            DateTime? startDateTime = filterForm.startDatetime == DateTime.MinValue ? null : filterForm.startDatetime;
+            DateTime? endDateTime = filterForm.endDatetime == DateTime.MinValue ? null : filterForm.endDatetime;
             String csvResponseSensorData = await _apiService.GetSensorDataInFormat("csv",sensorId, sensorType,
-                dateTime, null, null, null,
+                startDateTime, endDateTime, null, null, null,
                 null, null);
             var stream = new MemoryStream(Encoding.ASCII.GetBytes(csvResponseSensorData));  
             return new FileStreamResult(stream, new MediaTypeHeaderValue("text/csv"))  
@@ -82,7 +84,7 @@ namespace GUI.Controllers
         public async Task<IActionResult> Filter(FilterTableForm filterForm)
         {
             string jsonResponseSensorData = await _apiService.GetSensorData(filterForm.sensorId, filterForm.sensorType,
-                filterForm.dateTime, null, 1, 50,
+                filterForm.startDatetime,filterForm.endDatetime, null, 1, 50,
                 null, null);
             ViewBag.raw_json = jsonResponseSensorData;
             

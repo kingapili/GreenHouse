@@ -26,7 +26,7 @@ namespace GUI.Controllers
         {
             string jsonResponseSensorData = await _apiService.GetSensorData(null,
                 "Model.SolarRadiationSensor",
-                null, null, 1, 100,
+                null, null, null, 1, 100,
                 null, null);
             List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
 
@@ -47,7 +47,7 @@ namespace GUI.Controllers
             
             jsonResponseSensorData = await _apiService.GetSensorData(null,
                 "Model.HumiditySensor",
-                null, null, 1, 100,
+                null,null, null, 1, 100,
                 null, null);
             sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
 
@@ -68,7 +68,7 @@ namespace GUI.Controllers
             
             jsonResponseSensorData = await _apiService.GetSensorData(null,
                 "Model.CarbonDioxideSensor",
-                null, null, 1, 100,
+                null, null,null, 1, 100,
                 null, null);
             sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
 
@@ -89,7 +89,7 @@ namespace GUI.Controllers
             
             jsonResponseSensorData = await _apiService.GetSensorData(null,
                 "Model.TemperatureSensor",
-                null, null, 1, 100,
+                null,null, null, 1, 100,
                 null, null);
             sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
 

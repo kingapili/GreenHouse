@@ -26,18 +26,19 @@ namespace GUI.Controllers
         public async Task<IActionResult> Graph(
             [FromQuery]int? sensorId, 
             [FromQuery]string sensorType,
-            [FromQuery]DateTime? dateTime, 
+            [FromQuery]DateTime? startDateTime, 
+            [FromQuery]DateTime? endDateTime,
             [FromQuery]double? value, 
             [FromQuery]int? page,
             [FromQuery] int? pageSize)
         {
             string jsonResponseSensorData = await _apiService.GetSensorData(sensorId, sensorType,
-                dateTime, value, page, pageSize,
+                startDateTime, endDateTime,  value, page, pageSize,
                 null, null);
             
             List<SensorData> sensorData = JsonSerializer.Deserialize<List<SensorData>>(jsonResponseSensorData);
 
-            @ViewBag.name = "Graf for";
+            @ViewBag.name = "Graf for " + sensorType;
             List<double> values = new List<double>();
 
             for (int i = 0; i < sensorData.Count; i++)

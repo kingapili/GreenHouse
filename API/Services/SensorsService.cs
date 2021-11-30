@@ -31,7 +31,7 @@ namespace API.Services
             _readouts = database.GetCollection<API.Models.SensorData>(settings.SensorReadoutsCollectionName);
         }
 
-        public List<SensorData> GetAll(int? sensorId, string sensorType, DateTime? dateTime, double? value, int? page,
+        public List<SensorData> GetAll(int? sensorId, string sensorType, DateTime? startDateTime, DateTime? endDateTime, double? value, int? page,
             int? pageSize, string sortBy, bool? ascending)
         {
             // set default values if not provided
@@ -46,8 +46,11 @@ namespace API.Services
             if (sensorType != null)
                 filter &= Builders<Models.SensorData>.Filter.Eq(x => x.SensorType, sensorType);
 
-            if (dateTime.HasValue)
-                filter &= Builders<Models.SensorData>.Filter.Eq(x => x.DateTime, dateTime);
+            if (startDateTime.HasValue)
+                filter &= Builders<Models.SensorData>.Filter.Gte(x => x.DateTime, startDateTime);
+            
+            if (endDateTime.HasValue)
+                filter &= Builders<Models.SensorData>.Filter.Lte(x => x.DateTime, endDateTime);
 
             if (value.HasValue)
                 filter &= Builders<Models.SensorData>.Filter.Eq(x => x.Value, value);

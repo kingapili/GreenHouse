@@ -27,21 +27,23 @@ namespace GUI.Services
         }
 
         public async Task<string> GetSensorData(int? sensorId, string sensorType,
-            DateTime? dateTime, double? value, int? page, int? pageSize,
+            DateTime? startDateTime, DateTime? endDateTime, double? value, int? page, int? pageSize,
             string sortBy, bool? ascending)
         {
-            string requestUri = AddParamsToUri("/api/Sensors/GetSensorData", sensorId, sensorType, dateTime, value,
+            string requestUri = AddParamsToUri("/api/Sensors/GetSensorData", sensorId, sensorType, startDateTime, 
+                endDateTime, value,
                 page, pageSize, sortBy, ascending);
             HttpResponseMessage response = await _client.GetAsync(requestUri);
             string content = await response.Content.ReadAsStringAsync();
             return content;
         }
 
-        public async Task<string> GetSensorDataInFormat(string format, int? sensorId, string sensorType, DateTime? dateTime, double? value,
+        public async Task<string> GetSensorDataInFormat(string format, int? sensorId, string sensorType, 
+            DateTime? startDateTime, DateTime? endDateTime, double? value,
             int? page, int? pageSize, string sortBy, bool? @ascending)
         {
             string requestUri = AddParamsToUri($"/api/Sensors/GetSensorDataInFormat/{format}", 
-                sensorId, sensorType, dateTime, value, page, pageSize, sortBy, ascending);
+                sensorId, sensorType, startDateTime, endDateTime, value, page, pageSize, sortBy, ascending);
             
             HttpResponseMessage response = await _client.GetAsync(requestUri);
             string content = await response.Content.ReadAsStringAsync();
@@ -49,7 +51,7 @@ namespace GUI.Services
         }
 
         private string AddParamsToUri(string uri, 
-            int? sensorId, string sensorType, DateTime? dateTime, double? value, 
+            int? sensorId, string sensorType, DateTime? startDateTime, DateTime? endDateTime, double? value, 
             int? page, int? pageSize,string sortBy, bool? ascending)
         {
             List<string> requestParams = new List<string>();
@@ -57,8 +59,10 @@ namespace GUI.Services
                 requestParams.Add($"sensorId={sensorId.Value}");
             if(sensorType != null)
                 requestParams.Add($"sensorType={sensorType}");
-            if(dateTime.HasValue)
-                requestParams.Add($"dateTime={dateTime.Value.ToString("o")}");
+            if(startDateTime.HasValue)
+                requestParams.Add($"startDateTime={startDateTime.Value.ToString("o")}");
+            if(endDateTime.HasValue)
+                requestParams.Add($"endDateTime={endDateTime.Value.ToString("o")}");
             if(value.HasValue)
                 requestParams.Add($"value={value.Value}");
             if(page.HasValue)

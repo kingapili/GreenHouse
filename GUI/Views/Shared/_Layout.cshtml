@@ -24,14 +24,15 @@
 
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Series" asp-action="Graph"
-      asp-route-sortBy="@Context.Request.Query["sortBy"]"
-      asp-route-page="@Context.Request.Query["page"]"
-                asp-route-value="@Context.Request.Query["value"]"
-                asp-route-pageSize="@Context.Request.Query["pageSize"]"
-                asp-route-sensorType="@Context.Request.Query["sensorType"]"
-                asp-route-sensorId="@Context.Request.Query["sensorId"]"
-                asp-route-datetime="@Context.Request.Query["datetime"]"
-                asp-route-ascending="@Context.Request.Query["ascending"]">Graph</a>
+                  asp-route-sortBy="@Context.Request.Query["sortBy"]"
+                  asp-route-page="@Context.Request.Query["page"]"
+                    asp-route-value="@Context.Request.Query["value"]"
+                    asp-route-pageSize="@Context.Request.Query["pageSize"]"
+                    asp-route-sensorType="@Context.Request.Query["sensorType"]"
+                    asp-route-sensorId="@Context.Request.Query["sensorId"]"
+                    asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+                  asp-route-endDatetime="@Context.Request.Query["endDatetime"]"\
+                  asp-route-ascending="@Context.Request.Query["ascending"]">Graph</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Filter" asp-action="GetJson"
@@ -41,7 +42,8 @@
                 asp-route-pageSize="@Context.Request.Query["pageSize"]"
                 asp-route-sensorType="@Context.Request.Query["sensorType"]"
                 asp-route-sensorId="@Context.Request.Query["sensorId"]"
-                asp-route-datetime="@Context.Request.Query["datetime"]"
+                asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+                                asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
                 asp-route-ascending="@Context.Request.Query["ascending"]">Get JSON</a>
                     </li>
                     <li class="nav-item">
@@ -52,7 +54,8 @@
                 asp-route-pageSize="@Context.Request.Query["pageSize"]"
                 asp-route-sensorType="@Context.Request.Query["sensorType"]"
                 asp-route-sensorId="@Context.Request.Query["sensorId"]"
-                asp-route-datetime="@Context.Request.Query["datetime"]"
+                asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+                                asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
                 asp-route-ascending="@Context.Request.Query["ascending"]">Get CSV</a>
                     </li>
                     <li class="nav-item">

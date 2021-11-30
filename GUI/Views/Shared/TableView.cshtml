@@ -9,7 +9,8 @@
                 asp-route-pageSize="@Context.Request.Query["pageSize"]"
                 asp-route-sensorType="@Context.Request.Query["sensorType"]"
                 asp-route-sensorId="@Context.Request.Query["sensorId"]"
-                asp-route-datetime="@Context.Request.Query["datetime"]"
+                asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+                asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
                 asp-route-ascending="@Context.Request.Query["ascending"]">
 
     
@@ -26,9 +27,15 @@
     
     <div>
 
-        <p>@Html.LabelFor(x => x.dateTime)
-        @Html.EditorFor(x => x.dateTime)</p>
+        <p>@Html.LabelFor(x => x.startDatetime)
+            @Html.EditorFor(x => x.startDatetime)</p>
     </div>
+    
+    <div>
+    
+            <p>@Html.LabelFor(x => x.endDatetime)
+            @Html.EditorFor(x => x.endDatetime)</p>
+        </div>
         
 
                                             
@@ -44,7 +51,8 @@
                   asp-route-pageSize="@Context.Request.Query["pageSize"]"
                   asp-route-sensorType="@Context.Request.Query["sensorType"]"
                   asp-route-sensorId="@Context.Request.Query["sensorId"]"
-                  asp-route-datetime="@Context.Request.Query["datetime"]"
+                  asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+                  asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
                   asp-route-ascending="@Context.Request.Query["ascending"]">
                 <input type="hidden" name="sortBy" value="sensorId" />
                 <input type="submit" value="SensorId"/>
@@ -57,7 +65,8 @@
                   asp-route-pageSize="@Context.Request.Query["pageSize"]"
                   asp-route-sensorType="@Context.Request.Query["sensorType"]"
                   asp-route-sensorId="@Context.Request.Query["sensorId"]"
-                  asp-route-datetime="@Context.Request.Query["datetime"]"
+                  asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+                  asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
                   asp-route-ascending="@Context.Request.Query["ascending"]">
                             <input type="hidden" name="sortBy" value="sensorType" />
                 <input type="submit" value="SensorType"/>
@@ -70,7 +79,8 @@
                   asp-route-pageSize="@Context.Request.Query["pageSize"]"
                   asp-route-sensorType="@Context.Request.Query["sensorType"]"
                   asp-route-sensorId="@Context.Request.Query["sensorId"]"
-                  asp-route-datetime="@Context.Request.Query["datetime"]"
+                  asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+                  asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
                   asp-route-ascending="@Context.Request.Query["ascending"]">
                             <input type="hidden" name="sortBy" value="DataType" />
                 <input type="submit" value="DataType"/>
@@ -83,7 +93,8 @@
                   asp-route-pageSize="@Context.Request.Query["pageSize"]"
                   asp-route-sensorType="@Context.Request.Query["sensorType"]"
                   asp-route-sensorId="@Context.Request.Query["sensorId"]"
-                  asp-route-datetime="@Context.Request.Query["datetime"]"
+                  asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+                  asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
                   asp-route-ascending="@Context.Request.Query["ascending"]">
                 <input type="hidden" name="sortBy" value="Value" />
                 <input type="submit" value="Value"/>
@@ -107,7 +118,8 @@ Page: @Context.Request.Query["page"]
       asp-route-pageSize="@Context.Request.Query["pageSize"]"
       asp-route-sensorType="@Context.Request.Query["sensorType"]"
       asp-route-sensorId="@Context.Request.Query["sensorId"]"
-      asp-route-datetime="@Context.Request.Query["datetime"]"
+      asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+      asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
       asp-route-ascending="@Context.Request.Query["ascending"]">
     <input type="hidden" name="page" value="1"/>
     <input type="submit" value="First Page"/>
@@ -125,12 +137,13 @@ Page: @Context.Request.Query["page"]
 
     <form asp-action="setPage" method="post"
           asp-route-sortBy="@Context.Request.Query["sortBy"]"
-                  asp-route-value="@Context.Request.Query["value"]"
-                  asp-route-pageSize="@Context.Request.Query["pageSize"]"
-                  asp-route-sensorType="@Context.Request.Query["sensorType"]"
-                  asp-route-sensorId="@Context.Request.Query["sensorId"]"
-                  asp-route-datetime="@Context.Request.Query["datetime"]"
-                  asp-route-ascending="@Context.Request.Query["ascending"]">
+          asp-route-value="@Context.Request.Query["value"]"
+          asp-route-pageSize="@Context.Request.Query["pageSize"]"
+          asp-route-sensorType="@Context.Request.Query["sensorType"]"
+          asp-route-sensorId="@Context.Request.Query["sensorId"]"
+          asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+          asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
+          asp-route-ascending="@Context.Request.Query["ascending"]">
         <input type="hidden" name="page" value="@( @page- 1)"/>
         <input type="submit" value="Previous"/>
     </form>
@@ -141,7 +154,8 @@ Page: @Context.Request.Query["page"]
           asp-route-pageSize="@Context.Request.Query["pageSize"]"
           asp-route-sensorType="@Context.Request.Query["sensorType"]"
           asp-route-sensorId="@Context.Request.Query["sensorId"]"
-          asp-route-datetime="@Context.Request.Query["datetime"]"
+          asp-route-startDatetime="@Context.Request.Query["startDatetime"]"
+          asp-route-endDatetime="@Context.Request.Query["endDatetime"]"
           asp-route-ascending="@Context.Request.Query["ascending"]">
         <input type="hidden" name="page" value="@( @page +1)"/>
         <input type="submit" value="Next"/>

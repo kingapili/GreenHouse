@@ -26,7 +26,8 @@ namespace GUI.Controllers
         public async Task<IActionResult> Index(
             [FromQuery]int? sensorId, 
             [FromQuery]string sensorType,
-            [FromQuery]DateTime? dateTime, 
+            [FromQuery]DateTime? startDatetime, 
+            [FromQuery]DateTime? endDatetime, 
             [FromQuery]double? value, 
             [FromQuery]int? page,
             [FromQuery] int? pageSize,
@@ -38,16 +39,17 @@ namespace GUI.Controllers
                 {
                     page = 1,
                     sensorId,
-                    dateTime,
+                    startDatetime = startDatetime,
+                    endDatetime = endDatetime,
                     sensorType,
                     value,
                     pageSize = 20,
                     sortBy,
                     ascending
                 });
-            
+
             string jsonResponseSensorData = await _apiService.GetSensorData(sensorId, sensorType,
-                dateTime, value, page, pageSize,
+                startDatetime, endDatetime, value, page, pageSize,
                 sortBy, ascending);
 
             ViewBag.raw_json = jsonResponseSensorData;
@@ -71,13 +73,16 @@ namespace GUI.Controllers
         {
             int? sensorId = filterTableForm.sensorId == 0 ? null : filterTableForm.sensorId;
             string sensorType = filterTableForm.sensorType == "" ? null : filterTableForm.sensorType;
-            DateTime? dateTime = filterTableForm.dateTime == DateTime.MinValue ? null : filterTableForm.dateTime;
+            DateTime? startDatetime = filterTableForm.startDatetime == DateTime.MinValue ? null : filterTableForm.startDatetime;
+            DateTime? endDatetime = filterTableForm.endDatetime == DateTime.MinValue ? null : filterTableForm.endDatetime;
+            
 
             return RedirectToAction("Index", new
             {
                 page,
                 sensorId,
-                dateTime,
+                startDatetime = startDatetime,
+                endDatetime = endDatetime,
                 sensorType,
                 value,
                 pageSize,
@@ -92,7 +97,8 @@ namespace GUI.Controllers
             [FromForm(Name = "page")] int pageNumber,
             [FromQuery]int? sensorId, 
             [FromQuery]string sensorType,
-            [FromQuery]DateTime? dateTime, 
+            [FromQuery]DateTime? startDatetime, 
+            [FromQuery]DateTime? endDatetime,
             [FromQuery]double? value,
             [FromQuery]int? pageSize,
             [FromQuery]string sortBy, 
@@ -102,7 +108,8 @@ namespace GUI.Controllers
             {
                 page = pageNumber,
                 sensorId,
-                dateTime,
+                startDatetime = startDatetime,
+                endDatetime = endDatetime,
                 sensorType,
                 value,
                 pageSize,
@@ -117,7 +124,8 @@ namespace GUI.Controllers
             [FromForm(Name = "sortBy")] string sortBy,
             [FromQuery]int? sensorId, 
             [FromQuery]string sensorType,
-            [FromQuery]DateTime? dateTime, 
+            [FromQuery]DateTime? startDatetime, 
+            [FromQuery]DateTime? endDatetime,
             [FromQuery]double? value,
             [FromQuery] int? page,
             [FromQuery]int? pageSize,
@@ -128,7 +136,8 @@ namespace GUI.Controllers
             {
                 page = page,
                 sensorId = sensorId,
-                dateTime = dateTime,
+                startDatetime = startDatetime,
+                endDatetime = endDatetime,
                 sensorType = sensorType,
                 value = value,
                 pageSize = pageSize,
