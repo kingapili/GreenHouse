@@ -83,5 +83,10 @@ namespace Sensors.Utils
         {
             return JsonSerializer.Serialize(data);
         }
+
+        public static string FormatSensorName(string sensorName)
+        {
+            return sensorName.Remove(0, 6).Insert(0, "");
+        }
     }
 }
