@@ -4,16 +4,16 @@ namespace Model
 {
     /// <summary>
     /// Class for air humidity sensor.
-    /// Generates humidity values in 0% - 100% range. 
     /// </summary>
     public class HumiditySensor : ISensor
     {
-        private const int MinValue = 0;
-        private const int MaxValue = 100;
+        private const int Precision = 0;
         public int Id { get; set; }
         public string Name { get; set; }
         public int Interval { get; set; }
         public bool IsRunning { get; set; }
+        public double MinValue { get; set; }
+        public double MaxValue { get; set; }
 
         public SensorData GenerateSingleValue()
         {
@@ -23,7 +23,7 @@ namespace Model
                 SensorId = Id,
                 SensorType = GetType().ToString().Replace("Model.", ""),
                 DateTime = DateTime.Now,
-                Value = rng.Next(MinValue, MaxValue),
+                Value = Math.Round(rng.NextDouble() * (MaxValue - MinValue) + MinValue, Precision),
                 Unit = DataUnit.Percent
             };
         }

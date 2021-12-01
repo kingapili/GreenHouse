@@ -6,6 +6,8 @@ namespace Model
         public string Name { get; set; }
         public int Interval { get; set; }
         public bool IsRunning { get; set; }
+        public double MinValue { get; set; }
+        public double MaxValue { get; set; }
         
         /// <summary>
         /// Generates a single random SensorData object valid for given sensor type 

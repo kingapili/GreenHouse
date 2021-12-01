@@ -4,17 +4,16 @@ namespace Model
 {
     /// <summary>
     /// Class for carbon dioxide sensor. Measures carbon dioxide level in PPM (parts per million).
-    /// Generates values from 0 ppm to 2000 ppm.
     /// </summary>
     public class CarbonDioxideSensor : ISensor
     {
-        private const int MinValue = 0;
-        private const int MaxValue = 2000;
-
+        private const int Precision = 0;
         public int Id { get; set; }
         public string Name { get; set; } 
         public int Interval { get; set; }
         public bool IsRunning { get; set; }
+        public double MinValue { get; set; }
+        public double MaxValue { get; set; }
 
         public SensorData GenerateSingleValue()
         {
@@ -24,7 +23,7 @@ namespace Model
                 SensorId = Id,
                 SensorType = GetType().ToString().Replace("Model.", ""),
                 DateTime = DateTime.Now,
-                Value = rng.Next(MinValue, MaxValue),
+                Value = Math.Round(rng.NextDouble() * (MaxValue - MinValue) + MinValue, Precision),
                 Unit = DataUnit.Ppm
             };
         }

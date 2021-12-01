@@ -30,3 +30,18 @@ GET http://localhost:160/Sensors/runall
 
 # Stop generating data from all sensors
 GET http://localhost:160/Sensors/stopall
+
+###
+
+# Set sensor's (with id = {id}) data generation interval to a new value = {interval}
+PUT http://localhost:160/Sensors/{id}/set-interval/{interval}
+
+###
+
+# Set sensor's (with id = {id}) data generation rate so it generates {datapermin} new data in one minute
+PUT http://localhost:160/Sensors/{id}/set-datapermin/{datapermin}
+
+###
+
+# Set sensor's (with id = {id}) data generation range of values so it generates values in range [min, max)
+PUT http://localhost:160/Sensors/{id}/set-range/{min}:{max}

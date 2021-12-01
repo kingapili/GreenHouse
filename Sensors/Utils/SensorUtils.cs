@@ -23,48 +23,60 @@ namespace Sensors.Utils
                 {
                     case 1:
                     {
-                        var sensor = new CarbonDioxideSensor()
+                        // Generates values from 0 ppm to 2000 ppm by default
+                        var sensor = new CarbonDioxideSensor
                         {
                             Id = i,
                             Name = "Carbon dioxide sensor #" + i,
                             Interval = (i + 1) * 50,
-                            IsRunning = false
+                            IsRunning = false,
+                            MinValue = 0,
+                            MaxValue = 2000
                         };
                         sensors.Add(sensor);
                         break;
                     }
                     case 2:
                     {
-                        var sensor = new HumiditySensor()
+                        // Generates humidity values in 0% - 100% range by default
+                        var sensor = new HumiditySensor
                         {
                             Id = i,
                             Name = "Humidity sensor #" + i,
                             Interval = (i + 1) * 100,
-                            IsRunning = false
+                            IsRunning = false,
+                            MinValue = 0,
+                            MaxValue = 100
                         };
                         sensors.Add(sensor);
                         break;
                     }
                     case 3:
                     {
-                        var sensor = new SolarRadiationSensor()
+                        // Generates values from 0.5 to 7.0 [W/m^2] by default
+                        var sensor = new SolarRadiationSensor
                         {
                             Id = i,
                             Name = "Solar radiation sensor #" + i,
                             Interval = (i + 1) * 150,
-                            IsRunning = false
+                            IsRunning = false,
+                            MinValue = 0.5,
+                            MaxValue = 7.0
                         };
                         sensors.Add(sensor);
                         break;
                     }
                     case 4:
                     {
-                        var sensor = new TemperatureSensor()
+                        // Generates values from -20 to 50 degrees C by default
+                        var sensor = new TemperatureSensor
                         {
                             Id = i,
                             Name = "Temperature sensor #" + i,
                             Interval = (i + 1) * 200,
-                            IsRunning = false
+                            IsRunning = false,
+                            MinValue = -20,
+                            MaxValue = 50
                         };
                         sensors.Add(sensor);
                         break;
