@@ -5,6 +5,24 @@ Project for Si.NET classes at Gdansk University of Technology
 [![.NET v5.0][shield-.net]](https://docs.microsoft.com/en-us/dotnet/core/dotnet-five)
 [![ASP.NET][shield-asp.net]](https://dotnet.microsoft.com/apps/aspnet)
 
+## Description
+Solution has 3 projects: Sensors, API and GUI. 
+
+Sensors project is responsible for generating data and inserting it into the rabbitMQ bus.
+Project exposes endpoint to control data generating process.
+
+API project is responsible for getting data out of the rabbitMQ bus and inserting it to the database. 
+Project also exposes endpoints do get data with filtering, sorting and pagination. 
+There are two available endpoints; one for getting the data and the second one for getting the sensors data in specified format. 
+API handles two formats: Json and CSV.
+
+GUI project is responsible for displaying sensors data in table. 
+GUI projects takes data from the API endpoints.
+Data can be sorted, filtered
+and exported to files. GUI project also generates graph from the filtered data.
+
+Examples of http request for
+Sensors and API projects are available in requests.http in projects directories. 
 
 ## Requirements
 

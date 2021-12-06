@@ -3,44 +3,50 @@ version: '3.8'
 services:
   rabbitmq_service:
     image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
     networks:
       - sensors_network
       - backend_network
+    container_name: SI_160132_rabbitmq_service
   data_generator:
-    image: 10.40.71.55:5000/si_160132_data_generator_img
+    image: si_160132_data_generator_img
     ports:
       - "160:80"
     depends_on:
       - rabbitmq_service
     networks:
       - sensors_network
+    container_name: SI_160132_data_generator
   api:
-    image: 10.40.71.55:5000/si_160132_api_img
+    image: si_160132_api_img
+    ports:
+      - "91:80"
     depends_on:
       - rabbitmq_service
     networks:
       - backend_network
-      - frontend_network
-      - mongo
+      - fronend_network
+    container_name: SI_160132_api
   gui:
-    image: 10.40.71.55:5000/si_160132_gui_img
+    image: si_160132_gui_img
     ports:
       - "1601:80"
       - "16013:443"
     depends_on:
-      - api
+     - api
     networks:
-      - frontend_network
+      - fronend_network
+    container_name: SI_160132_gui
+
 networks:
-  mongo:
-    external: true
-    name: admin-mongodb_default
   sensors_network:
     name: SI_160132_sensors
-    driver: overlay
+    driver: bridge
   backend_network:
     name: SI_160132_backend
-    driver: overlay
-  frontend_network:
-    name: SI_160132_frontend
-    driver: overlay
+    driver: bridge
+  fronend_network:
+    name: SI_160132_fronend
+    driver: bridge
